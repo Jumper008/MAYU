@@ -1,0 +1,46 @@
+# Map file for tile-based game
+# (Lines that start with '#' are comments)
+# The tiles are:
+#   (Space) Empty tile
+#   A..Z    Tiles A through Z
+#   o       Star
+#   !       Music Note
+#   *       Goal
+#   1       Bad Guy 1 (grub)
+#   1       Bad Guy 1 (fly)
+
+
+
+ 
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                                                                         MMM              M
+                                                                                          MM              M              
+ *                                                                                         M                
+LLLL                                                                                       M 1           AM
+         LLLLLL                    LLLLLL                                                  MLLL      LLLLLM
+             LLLL        LLLLLL                                LL                          M        1M    M
+                                                                                              2    MMM    M
+                                                1                                                  MMM    M
+                                              MMMMMMM               MMMMM                    2    MMMM    M
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIIIIIIIIIIIMMMMM                        MMMMM  o M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMML    MMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                         MM                                              MMM              M
+                                         MM                                               MM              M
+                                         MM                                                M              
+                                         MM                              LLLL              M 1           AM
+                                         MM                                                MLLL      LLLLLM
+                                         MM                                                M       1M     M
+                                         MM	       		       MMMM                        MMM    M
+                                         MM     		       MMMMMM                      MMM    M
+                                         MM       MMMIIIIIMMMIIIIMMIIIIIMMMMMMM                    MMM  o M
+                                         MMLL    LMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                         MM                                                           MMMMM
+                                         MM                                                             MMM
+                                         MM LLLLLL                                   2                    M
+                                         MM                                                               M
+                                         MM A          1     1          1                       A         M
+                                         MMLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL       D
+                                         MM                                                               D
+                                         MM                                                               D 
+                                         MM        A      1     1        A1          1  1                 D
+                                         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
