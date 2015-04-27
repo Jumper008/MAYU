@@ -76,6 +76,7 @@ public class GameManager extends GameCore {
     private int iLife;
     private int iScore;
     private boolean bPause;
+    private boolean bPausaMenu;
     //private Sprite SprLife;
     //private LinkedList<Sprite> lklLife;
     
@@ -147,6 +148,8 @@ public class GameManager extends GameCore {
         
         //Pause
         bPause = false;
+        //Pausamenu
+        bPausaMenu = false;
     }
     
     /**
@@ -216,13 +219,15 @@ public class GameManager extends GameCore {
         if(gaExitGame.isPressed() && bPause){
             stop();
         }
-        if (gaPause.isPressed() ){
+        if (gaPause.isPressed() && rmResourceManager.iCurrentMap == 4 ){
             if(!bPause){
                 bPause = true;
-                rmResourceManager.spawnMenu(100, 100, tmMap);
+                rmResourceManager.spawnMenu(plaPlayer.getX()-160, 500, tmMap, false);
+                
             }
             else{
                 bPause = false;
+                rmResourceManager.spawnMenu(plaPlayer.getX()-160, 500, tmMap, true);
             }
         }
         if(gaWakeUp.isPressed() && bPause){
@@ -337,10 +342,6 @@ public class GameManager extends GameCore {
          gra2D_G.drawString("Life: " + iLife, 10, 45);   
         }
         
-        if(bPause){
-            gra2D_G.drawString("Pause" ,370,300);
-            
-        }
         
         //JUST SOME TESTING. ERASE PLEASE.
             // Displays the amount of weapons supposedly on screen as well as the position of the newest weapon on screen

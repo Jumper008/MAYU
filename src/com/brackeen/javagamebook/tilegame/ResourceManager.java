@@ -366,7 +366,7 @@ public class ResourceManager {
             loadImage("Heart1.png"),
             loadImage("Heart2.png"),
             loadImage("Heart3.png"),
-            loadImage("bb_ground.jpg")
+            loadImage("bb_ground75%.jpg")
         };
 
         imaMatImages[1] = new Image[imaMatImages[0].length];
@@ -566,15 +566,19 @@ public class ResourceManager {
      * @param fPosX is an object of class <code>float</code> that represents the position of the arrow in the X axis
      * @param fPosY is an object of class <code>float</code> that represents the position of the arrow in the Y axis
      */
-      public void spawnMenu(float fPosX, float fPosY, TileMap tmMap) {
-        Sprite sprSpawnSprite;
-        sprSpawnSprite = (Sprite) sprPauseMenu.clone();
+      public void spawnMenu(float fPosX, float fPosY, TileMap tmMap, boolean bPausaMenu) {
         
-        sprSpawnSprite.setX(fPosX);
-        sprSpawnSprite.setY(fPosY);
+        if(!bPausaMenu){
+        sprPauseMenu.setX(fPosX);
+        sprPauseMenu.setY(fPosY);
        
         
-        tmMap.addSprite(sprSpawnSprite);
+        tmMap.addSprite(sprPauseMenu);
+         
+        }
+        else{
+            tmMap.removeSprite(sprPauseMenu);
+        }
     }
 
 }
