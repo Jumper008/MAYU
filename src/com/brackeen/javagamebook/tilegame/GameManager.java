@@ -14,6 +14,11 @@ import com.brackeen.javagamebook.input.*;
 import com.brackeen.javagamebook.test.GameCore;
 import com.brackeen.javagamebook.tilegame.sprites.*;
 import java.util.LinkedList;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+
+
+
 
 /**
  * GameManager
@@ -37,6 +42,7 @@ public class GameManager extends GameCore {
      */
     public static void main(String[] sArrArgs) {
         new GameManager().run();
+        
     }
 
     // uncompressed, 44100Hz, 16-bit, mono, signed, little-endian
@@ -70,6 +76,8 @@ public class GameManager extends GameCore {
     private GameAction gaResume;
     private GameAction gaWakeUp;
     private GameAction gaExitGame;
+    private GameAction gaEnter;
+    
     
     private float fInitialJumpY;    // States from where the character started to jump
     
@@ -77,6 +85,10 @@ public class GameManager extends GameCore {
     private int iScore;
     private boolean bPause;
     private boolean bArrow;
+    private BufferedImage originalImage;
+    private BufferedImage textImage;
+    private Graphics2D g;
+    private URL url;
     
 
     /**
@@ -105,7 +117,8 @@ public class GameManager extends GameCore {
         
         // load map images in order
             // Main menu
-        lklBackgrounds.add(rmResourceManager.loadImage("Habitacion.jpg"));
+        //lklBackgrounds.add(rmResourceManager.loadImage("Habitacion_Principal_Nubes.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Habitacion_Principal.jpg"));
         lklBackgrounds.add(rmResourceManager.loadImage("Escritorio.jpg"));
         lklBackgrounds.add(rmResourceManager.loadImage("Controles.jpg"));
             // First map
@@ -118,6 +131,7 @@ public class GameManager extends GameCore {
         lklBackgrounds.add(rmResourceManager.loadImage("first.jpg"));
             //GameOver map
         lklBackgrounds.add(rmResourceManager.loadImage("Game Over.jpg"));
+        
         
         tmrRenderer.setBackground(lklBackgrounds.get(0));
         
@@ -144,6 +158,10 @@ public class GameManager extends GameCore {
         
         //Arrow
         bArrow = false;
+        
+     
+       
+         
     }
     
     /**
@@ -181,6 +199,8 @@ public class GameManager extends GameCore {
             GameAction.iDETECT_INITAL_PRESS_ONLY);
         gaExitGame = new GameAction("ExitGame",
             GameAction.iDETECT_INITAL_PRESS_ONLY);
+        gaEnter = new GameAction("Enter", 
+                GameAction.iDETECT_RELEASE_ONLY);
 
         imInputManager = new InputManager(
             smScreen.getFullScreenWindow());
@@ -195,6 +215,7 @@ public class GameManager extends GameCore {
         imInputManager.mapToKey(gaResume, KeyEvent.VK_R);
         imInputManager.mapToKey(gaWakeUp, KeyEvent.VK_W);
         imInputManager.mapToKey(gaExitGame, KeyEvent.VK_Q);
+        imInputManager.mapToKey(gaEnter, KeyEvent.VK_ENTER);
     }
 
     /**
@@ -210,18 +231,19 @@ public class GameManager extends GameCore {
         if (gaExit.isPressed()) {
             stop();
         }
+       
         if(gaExitGame.isPressed() && bPause){
             stop();
         }
         if (gaPause.isPressed() && rmResourceManager.iCurrentMap == 4 ){
             if(!bPause){
                 bPause = true;
-                rmResourceManager.spawnMenu(plaPlayer.getX()-160, 500, tmMap, false);
+               // rmResourceManager.spawnMenu(plaPlayer.getX()-160, 500, tmMap, false);
                 
             }
             else{
                 bPause = false;
-                rmResourceManager.spawnMenu(plaPlayer.getX()-160, 500, tmMap, true);
+                //rmResourceManager.spawnMenu(plaPlayer.getX()-160, 500, tmMap, true);
             }
         }
         if(gaWakeUp.isPressed() && bPause){
@@ -253,6 +275,11 @@ public class GameManager extends GameCore {
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
                     }
+                     /*if (gaEnter.isPressed()) {
+                        tmrRenderer.setBackground(lklBackgrounds.get
+                                (rmResourceManager.getICurrentMap()));
+                        tmMap = rmResourceManager.loadNextMap();
+                    }*/
                     break;
                 }
                 // Settings
@@ -300,15 +327,15 @@ public class GameManager extends GameCore {
                         bArrow = true;
                         if (plaPlayer.getFacingRight()) { // To the right
                             rmResourceManager.spawnArrow(
-                                    plaPlayer.getX() + TileMapRenderer.tilesToPixels(1) + 10f, 
+                                    plaPlayer.getX() + TileMapRenderer.tilesToPixels(1) + 15f, 
                                     plaPlayer.getY(), 
-                                    2f, -.4f, tmMap);
+                                    1f, -.2f, tmMap);
                         }
                         else {
                             rmResourceManager.spawnArrow( // To the left
-                                    plaPlayer.getX() - TileMapRenderer.tilesToPixels(1) - 10f, 
+                                    plaPlayer.getX() - TileMapRenderer.tilesToPixels(1) - 15f, 
                                     plaPlayer.getY(), 
-                                    -2f, -.4f, tmMap);
+                                    -1f, -.2f, tmMap);
                         }
                     }
                     
@@ -331,12 +358,26 @@ public class GameManager extends GameCore {
         tmrRenderer.draw(gra2D_G, tmMap,
             smScreen.getWidth(), smScreen.getHeight());
         
+         gra2D_G.setColor(Color.black);
+        
+        if(bPause){
+            gra2D_G.setColor(Color.decode("#A3A375"));
+            gra2D_G.fill3DRect((smScreen.getWidth()/2) - 180, 180, 350, 250, bPause);
+            gra2D_G.setColor(Color.black);
+            gra2D_G.drawString("Pause", (smScreen.getWidth()/2) - 50, 240);
+            gra2D_G.drawString("Resume Game - P", (smScreen.getWidth()/2) - 100, 300);
+            gra2D_G.drawString("Wake up - W", (smScreen.getWidth()/2) - 70, 340);
+            gra2D_G.drawString("Quit Game - Q", (smScreen.getWidth()/2) - 80, 380);
+            gra2D_G.draw3DRect((smScreen.getWidth()/2) - 180, 180, 350, 250, bPause);
+            
+            
+        }
+        
          //Update life and score
         if(rmResourceManager.iCurrentMap == 4){
          gra2D_G.drawString("Score: " + iScore, 10, 20);
          gra2D_G.drawString("Life: " + iLife, 10, 45);
         }
-        
         
         //JUST SOME TESTING. ERASE PLEASE.
             // Displays the amount of weapons supposedly on screen as well as the position of the newest weapon on screen

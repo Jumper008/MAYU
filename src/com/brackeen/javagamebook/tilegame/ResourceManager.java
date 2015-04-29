@@ -354,19 +354,34 @@ public class ResourceManager {
 
         // load left-facing images
         imaMatImages[0] = new Image[] {
-            getMirrorImage(loadImage("mono1.png")),
+            /*getMirrorImage(loadImage("mono1.png")),
             getMirrorImage(loadImage("mono2.png")),
             getMirrorImage(loadImage("mono3.png")),
-            //getMirrorImage(loadImage("mono4.png")),
+            *///getMirrorImage(loadImage("mono4.png")),
+            getMirrorImage(loadImage("PC_1.png")),
+            getMirrorImage(loadImage("PC_2.png")),
+            getMirrorImage(loadImage("PC_3.png")),
+            getMirrorImage(loadImage("PC_4.png")),
+            getMirrorImage(loadImage("PC_5.png")),
+            getMirrorImage(loadImage("PC_6.png")),
+            getMirrorImage(loadImage("PP_1.png")),
+            getMirrorImage(loadImage("PP_2.png")),
+            getMirrorImage(loadImage("PP_3.png")),
+            getMirrorImage(loadImage("PP_4.png")),
             loadImage("Murcielago1.png"),
             loadImage("Murcielago2.png"),
             loadImage("Murcielago1.png"),
-            loadImage("Malo_Espada1.png"),
-            loadImage("Malo_Espada2.png"),
+            loadImage("Malo_espada_caminando_1.png"),
+            loadImage("Malo_espada_caminando_2.png"),
+            loadImage("Malo_espada_caminando_3.png"),
+            loadImage("Malo_espada_caminando_4.png"),
+            loadImage("Malo_espada_caminando_5.png"),
+            loadImage("Malo_espada_caminando_6.png"),
             loadImage("Heart1.png"),
             loadImage("Heart2.png"),
             loadImage("Heart3.png"),
             loadImage("bb_ground75%.jpg")
+               
         };
 
         imaMatImages[1] = new Image[imaMatImages[0].length];
@@ -382,26 +397,33 @@ public class ResourceManager {
         }
 
         // create creature animations
-        Animation[] aniArrPlayerAnim = new Animation[4];
+        Animation[] aniArrPlayerCaminAnim = new Animation[4];
+        Animation[] aniArrPlayerParadoAnim = new Animation[4];
         Animation[] aniArrFlyAnim = new Animation[4];
         Animation[] aniArrGrubAnim = new Animation[4];
         Animation[] aniArrArrowAnim = new Animation[4];
         Animation[] aniArrPMenu = new Animation[4];
         for (int iI=0; iI<4; iI++) {
-            aniArrPlayerAnim[iI] = createPlayerAnim(imaMatImages[iI][0], 
-                    imaMatImages[iI][1], imaMatImages[iI][2]);
-            aniArrFlyAnim[iI] = createFlyAnim(imaMatImages[iI][3], 
-                    imaMatImages[iI][4], imaMatImages[iI][5]);
-            aniArrGrubAnim[iI] = createGrubAnim(imaMatImages[iI][6], 
-                    imaMatImages[iI][7]);
-            aniArrArrowAnim[iI] = createWeaponAnim(imaMatImages[iI][8], 
-                    imaMatImages[iI][9], imaMatImages[iI][10]);
-            aniArrPMenu[iI] = createMenuAnim(imaMatImages[iI][11]);
+            aniArrPlayerCaminAnim[iI] = createPlayerAnim(imaMatImages[iI][0], 
+                    imaMatImages[iI][1], imaMatImages[iI][2],imaMatImages[iI][3] ,
+                    imaMatImages[iI][4],imaMatImages[iI][5]);
+            aniArrPlayerParadoAnim[iI] = createPlayerAnim(imaMatImages[iI][6], 
+                    imaMatImages[iI][7], imaMatImages[iI][8],imaMatImages[iI][9] ,
+                    imaMatImages[iI][6],imaMatImages[iI][7]);
+            aniArrFlyAnim[iI] = createFlyAnim(imaMatImages[iI][10], 
+                    imaMatImages[iI][11], imaMatImages[iI][12]);
+            aniArrGrubAnim[iI] = createGrubAnim(imaMatImages[iI][13], 
+                    imaMatImages[iI][14],imaMatImages[iI][15],
+                    imaMatImages[iI][16],imaMatImages[iI][17],
+                    imaMatImages[iI][18]);
+            aniArrArrowAnim[iI] = createWeaponAnim(imaMatImages[iI][19], 
+                    imaMatImages[iI][19], imaMatImages[iI][19]);
+            aniArrPMenu[iI] = createMenuAnim(imaMatImages[iI][22]);
         }
 
         // create creature sprites
-        sprPlayerSprite = new Player(aniArrPlayerAnim[0], aniArrPlayerAnim[1],
-                aniArrPlayerAnim[2], aniArrPlayerAnim[3]);
+        sprPlayerSprite = new Player(aniArrPlayerCaminAnim[0], aniArrPlayerCaminAnim[1],
+                aniArrPlayerCaminAnim[0], aniArrPlayerCaminAnim[1]);
         sprFlySprite = new Fly(aniArrFlyAnim[0], aniArrFlyAnim[1],
                 aniArrFlyAnim[2], aniArrFlyAnim[3]);
         sprGrubSprite = new Grub(aniArrGrubAnim[0], aniArrGrubAnim[1],
@@ -422,15 +444,15 @@ public class ResourceManager {
      * @return object of class <code>Animation</code>
      */
     private Animation createPlayerAnim(Image imaPlayer1,
-        Image imaPlayer2, Image imaPlayer3)
+        Image imaPlayer2, Image imaPlayer3,Image imaPlayer4,Image imaPlayer5, Image imaPlayer6)
     {
         Animation aniAnim = new Animation();
         aniAnim.addFrame(imaPlayer1, 250);
         aniAnim.addFrame(imaPlayer2, 150);
-        aniAnim.addFrame(imaPlayer1, 150);
-        aniAnim.addFrame(imaPlayer2, 150);
-        aniAnim.addFrame(imaPlayer3, 200);
-        aniAnim.addFrame(imaPlayer2, 150);
+        aniAnim.addFrame(imaPlayer3, 150);
+        aniAnim.addFrame(imaPlayer4, 150);
+        aniAnim.addFrame(imaPlayer5, 200);
+        aniAnim.addFrame(imaPlayer6, 150);
         return aniAnim;
     }
     
@@ -499,10 +521,15 @@ public class ResourceManager {
      * @param imaImg3 is an object of class <code>Image</code>
      * @return object of class <code>Animation</code>
      */
-    private Animation createGrubAnim(Image imaImg1, Image imaImg2) {
+    private Animation createGrubAnim(Image imaImg1, Image imaImg2, 
+            Image imaImg3,Image imaImg4,Image imaImg5,Image imaImg6) {
         Animation aniAnim = new Animation();
         aniAnim.addFrame(imaImg1, 250);
-        aniAnim.addFrame(imaImg2, 250);
+        aniAnim.addFrame(imaImg2, 150);
+        aniAnim.addFrame(imaImg3, 150);
+        aniAnim.addFrame(imaImg4, 150);
+        aniAnim.addFrame(imaImg5, 200);
+        aniAnim.addFrame(imaImg6, 150);
         return aniAnim;
     }
 
