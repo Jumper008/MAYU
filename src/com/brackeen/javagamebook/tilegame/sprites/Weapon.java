@@ -120,4 +120,13 @@ public class Weapon extends Creature {
     public float getThrowSpeed() {
         return 0.95f;
     }
+    
+    /**
+     * isFlying
+     * 
+     * @return object of class <code>Boolean</code>
+     */
+    public boolean isFlying() {
+        return !isAlive();
+    }
 }

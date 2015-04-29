@@ -374,7 +374,7 @@ public class ResourceManager {
             loadImage("Malo_espada_caminando_4.png"),
             loadImage("Malo_espada_caminando_5.png"),
             loadImage("Malo_espada_caminando_6.png"),
-            loadImage("flecha.png"),
+            getMirrorImage(loadImage("flecha.png")),
             loadImage("flecha.png"),
             loadImage("flecha.png"),
             loadImage("bb_ground75%.jpg")
