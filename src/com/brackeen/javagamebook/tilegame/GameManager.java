@@ -187,7 +187,7 @@ public class GameManager extends GameCore {
         gaExitGame = new GameAction("ExitGame",
             GameAction.iDETECT_INITAL_PRESS_ONLY);
         gaEnter = new GameAction("Enter", 
-                GameAction.iDETECT_RELEASE_ONLY);
+                GameAction.iDETECT_INITAL_PRESS_ONLY);
 
         imInputManager = new InputManager(
             smScreen.getFullScreenWindow());
@@ -196,7 +196,7 @@ public class GameManager extends GameCore {
         imInputManager.mapToKey(gaMoveLeft, KeyEvent.VK_LEFT);
         imInputManager.mapToKey(gaMoveRight, KeyEvent.VK_RIGHT);
         imInputManager.mapToKey(gaJump, KeyEvent.VK_SPACE);
-        imInputManager.mapToKey(gaAttack, KeyEvent.VK_J);
+        imInputManager.mapToKey(gaAttack, KeyEvent.VK_X);
         imInputManager.mapToKey(gaExit, KeyEvent.VK_ESCAPE);
         imInputManager.mapToKey(gaPause, KeyEvent.VK_P);
         imInputManager.mapToKey(gaResume, KeyEvent.VK_R);
@@ -281,6 +281,7 @@ public class GameManager extends GameCore {
                     }
                     break;
                 }
+                
                 case 3:{
                     
                 }
