@@ -177,12 +177,6 @@ public class TileMapRenderer {
             int iX = Math.round(sprSprite.getX()) + iOffsetX;
             int iY = Math.round(sprSprite.getY()) + iOffsetY;
             gra2D_G.drawImage(sprSprite.getImage(), iX, iY, null);
-            
-            if (sprSprite instanceof Fly) {
-                System.out.println("Si");
-                System.out.println(sprSprite.getImage().getWidth(null));
-                System.out.println(sprSprite.getImage().getHeight(null));
-            }
 
             // wake up the creature when it's on screen
             if (sprSprite instanceof Creature &&

@@ -699,7 +699,10 @@ public class GameManager extends GameCore {
             }
             
             // Check if arrow stopped
-            if (creCreature.getVelocityX() == 0) { //Eliminate arrows once they have stopped
+            if (creCreature.getVelocityX() == 0 || 
+                    getTileCollision(creCreature, 
+                            creCreature.getX() + creCreature.getVelocityX(),
+                            creCreature.getY() + creCreature.getVelocityY()) != null) { //Eliminate arrows once they have stopped
                 creCreature.setState(Weapon.iSTATE_DYING); 
                 bArrow = false;
             }
