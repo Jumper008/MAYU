@@ -467,7 +467,7 @@ public class GameManager extends GameCore {
                                     TileMapRenderer.tilesToPixels(iY) 
                                     &&
                                     fNewY + sprSprite.getHeight() < 
-                                    TileMapRenderer.tilesToPixels(iY) + 20 
+                                    TileMapRenderer.tilesToPixels(iY) + 10 
                                     ) {
                                 if (sprSprite.getY() < fNewY) {
                                     pPointCache.setLocation(iX, iY); // stop the character on the platform
