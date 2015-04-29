@@ -113,7 +113,7 @@ public class GameManager extends GameCore {
         lklBackgrounds.add(rmResourceManager.loadImage("Escritorio.jpg"));
         lklBackgrounds.add(rmResourceManager.loadImage("Controles.jpg"));
             // First map
-        lklBackgrounds.add(rmResourceManager.loadImage("Fondo_Villa_2.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Fondo_Villa_2_Negro.jpg"));
             // Second map
         lklBackgrounds.add(rmResourceManager.loadImage("background.png"));
             // Third map
