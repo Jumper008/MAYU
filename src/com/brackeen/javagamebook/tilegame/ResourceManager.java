@@ -354,10 +354,6 @@ public class ResourceManager {
 
         // load left-facing images
         imaMatImages[0] = new Image[] {
-            /*getMirrorImage(loadImage("mono1.png")),
-            getMirrorImage(loadImage("mono2.png")),
-            getMirrorImage(loadImage("mono3.png")),
-            *///getMirrorImage(loadImage("mono4.png")),
             getMirrorImage(loadImage("PC_1.png")),
             getMirrorImage(loadImage("PC_2.png")),
             getMirrorImage(loadImage("PC_3.png")),
@@ -377,11 +373,10 @@ public class ResourceManager {
             loadImage("Malo_espada_caminando_4.png"),
             loadImage("Malo_espada_caminando_5.png"),
             loadImage("Malo_espada_caminando_6.png"),
-            loadImage("Heart1.png"),
-            loadImage("Heart2.png"),
-            loadImage("Heart3.png"),
+            loadImage("flecha.png"),
+            loadImage("flecha.png"),
+            loadImage("flecha.png"),
             loadImage("bb_ground75%.jpg")
-               
         };
 
         imaMatImages[1] = new Image[imaMatImages[0].length];
@@ -398,7 +393,7 @@ public class ResourceManager {
 
         // create creature animations
         Animation[] aniArrPlayerCaminAnim = new Animation[4];
-        Animation[] aniArrPlayerParadoAnim = new Animation[4];
+        Animation[] aniArrPlayerIdleAnim = new Animation[4];
         Animation[] aniArrFlyAnim = new Animation[4];
         Animation[] aniArrGrubAnim = new Animation[4];
         Animation[] aniArrArrowAnim = new Animation[4];
@@ -407,7 +402,7 @@ public class ResourceManager {
             aniArrPlayerCaminAnim[iI] = createPlayerAnim(imaMatImages[iI][0], 
                     imaMatImages[iI][1], imaMatImages[iI][2],imaMatImages[iI][3] ,
                     imaMatImages[iI][4],imaMatImages[iI][5]);
-            aniArrPlayerParadoAnim[iI] = createPlayerAnim(imaMatImages[iI][6], 
+            aniArrPlayerIdleAnim[iI] = createPlayerAnim(imaMatImages[iI][6], 
                     imaMatImages[iI][7], imaMatImages[iI][8],imaMatImages[iI][9] ,
                     imaMatImages[iI][6],imaMatImages[iI][7]);
             aniArrFlyAnim[iI] = createFlyAnim(imaMatImages[iI][10], 
@@ -423,13 +418,17 @@ public class ResourceManager {
 
         // create creature sprites
         sprPlayerSprite = new Player(aniArrPlayerCaminAnim[0], aniArrPlayerCaminAnim[1],
-                aniArrPlayerCaminAnim[0], aniArrPlayerCaminAnim[1]);
+                aniArrPlayerCaminAnim[2], aniArrPlayerCaminAnim[3],
+                aniArrPlayerIdleAnim[0], aniArrPlayerIdleAnim[1]);
         sprFlySprite = new Fly(aniArrFlyAnim[0], aniArrFlyAnim[1],
-                aniArrFlyAnim[2], aniArrFlyAnim[3]);
+                aniArrFlyAnim[2], aniArrFlyAnim[3], aniArrFlyAnim[0], 
+                aniArrFlyAnim[1]);
         sprGrubSprite = new Grub(aniArrGrubAnim[0], aniArrGrubAnim[1],
-                aniArrGrubAnim[2], aniArrGrubAnim[3]);
+                aniArrGrubAnim[2], aniArrGrubAnim[3], aniArrGrubAnim[0], 
+                aniArrGrubAnim[1]);
         sprArrowSprite = new Weapon(aniArrArrowAnim[0], aniArrArrowAnim[1], 
-                aniArrArrowAnim[2], aniArrArrowAnim[0]);
+                aniArrArrowAnim[2], aniArrArrowAnim[0], aniArrArrowAnim[0], 
+                aniArrArrowAnim[1]);
         sprPauseMenu = new Sprite(aniArrPMenu[0]);
     }
 

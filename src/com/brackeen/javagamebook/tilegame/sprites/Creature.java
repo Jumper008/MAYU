@@ -25,8 +25,10 @@ public abstract class Creature extends Sprite {
     public static final int iSTATE_DYING = 1;
     public static final int iSTATE_DEAD = 2;
 
-    private Animation aniLeft;
-    private Animation aniRight;
+    private Animation aniWalkLeft;
+    private Animation aniWalkRight;
+    private Animation aniIdleLeft;
+    private Animation aniIdleRight;
     private Animation aniDeadLeft;
     private Animation aniDeadRight;
     private int iState;
@@ -39,19 +41,24 @@ public abstract class Creature extends Sprite {
      * 
      * Creates a new Creature with the specified Animations.
      * 
-     * @param aniLeft is an object of class <code>Animation</code>
-     * @param aniRight is an object of class <code>Animation</code>
+     * @param aniWalkLeft is an object of class <code>Animation</code>
+     * @param aniWalkRight is an object of class <code>Animation</code>
      * @param aniDeadLeft is an object of class <code>Animation</code>
      * @param aniDeadRight is an object of class <code>Animation</code>
+     * @param aniIdleLeft is an object of class <code>Animation</code>
+     * @param aniIdleRight is an object of class <code>Animation</code>
      */
-    public Creature(Animation aniLeft, Animation aniRight,
-        Animation aniDeadLeft, Animation aniDeadRight)
+    public Creature(Animation aniWalkLeft, Animation aniWalkRight,
+        Animation aniDeadLeft, Animation aniDeadRight, Animation aniIdleLeft, 
+        Animation aniIdleRight)
     {
-        super(aniRight);
-        this.aniLeft = aniLeft;
-        this.aniRight = aniRight;
+        super(aniWalkRight);
+        this.aniWalkLeft = aniWalkLeft;
+        this.aniWalkRight = aniWalkRight;
         this.aniDeadLeft = aniDeadLeft;
         this.aniDeadRight = aniDeadRight;
+        this.aniIdleLeft = aniIdleLeft;
+        this.aniIdleRight = aniIdleRight;
         iState = iSTATE_NORMAL;
     }
 
@@ -67,10 +74,12 @@ public abstract class Creature extends Sprite {
         Constructor constConstructor = getClass().getConstructors()[0];
         try {
             return constConstructor.newInstance(new Object[] {
-                (Animation)aniLeft.clone(),
-                (Animation)aniRight.clone(),
+                (Animation)aniWalkLeft.clone(),
+                (Animation)aniWalkRight.clone(),
                 (Animation)aniDeadLeft.clone(),
-                (Animation)aniDeadRight.clone()
+                (Animation)aniDeadRight.clone(),
+                (Animation)aniIdleLeft.clone(),
+                (Animation)aniIdleRight.clone()
             });
         }
         catch (Exception ex) {
@@ -188,15 +197,21 @@ public abstract class Creature extends Sprite {
         // select the correct Animation
         Animation aniNewAnim = aniAnim;
         if (getVelocityX() < 0) {
-            aniNewAnim = aniLeft;
+            aniNewAnim = aniWalkLeft;
         }
         else if (getVelocityX() > 0) {
-            aniNewAnim = aniRight;
+            aniNewAnim = aniWalkRight;
         }
-        if (iState == iSTATE_DYING && aniNewAnim == aniLeft) {
+        else if (aniNewAnim == aniWalkLeft) {
+            aniNewAnim = aniIdleLeft;
+        }
+        else if (aniNewAnim == aniWalkRight) {
+            aniNewAnim = aniIdleRight;
+        }
+        if (iState == iSTATE_DYING && aniNewAnim == aniWalkLeft) {
             aniNewAnim = aniDeadLeft;
         }
-        else if (iState == iSTATE_DYING && aniNewAnim == aniRight) {
+        else if (iState == iSTATE_DYING && aniNewAnim == aniWalkRight) {
             aniNewAnim = aniDeadRight;
         }
 
