@@ -570,7 +570,7 @@ public class ResourceManager {
      * 
      * @param fPosX is an object of class <code>float</code> that represents the position of the arrow in the X axis
      * @param fPosY is an object of class <code>float</code> that represents the position of the arrow in the Y axis
-     * @param fVelX is an object of class <code>float</code> that represents the velocity of the arrow in the Y axis
+     * @param fVelX is an object of class <code>float</code> that represents the velocity of the arrow in the X axis
      * @param fVelY is an object of class <code>float</code> that represents the velocity of the arrow in the Y axis
      */
     public void spawnArrow(float fPosX, float fPosY, float fVelX, float fVelY, TileMap tmMap) {

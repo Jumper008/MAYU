@@ -17,9 +17,6 @@ import java.util.LinkedList;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
-
-
-
 /**
  * GameManager
  * 
@@ -78,19 +75,13 @@ public class GameManager extends GameCore {
     private GameAction gaExitGame;
     private GameAction gaEnter;
     
-    
     private float fInitialJumpY;    // States from where the character started to jump
     
     private int iLife;
     private int iScore;
     private boolean bPause;
     private boolean bArrow;
-    private BufferedImage originalImage;
-    private BufferedImage textImage;
-    private Graphics2D g;
-    private URL url;
     
-
     /**
      * init
      * 
@@ -157,11 +148,7 @@ public class GameManager extends GameCore {
         bPause = false;
         
         //Arrow
-        bArrow = false;
-        
-     
-       
-         
+        bArrow = false;  
     }
     
     /**
@@ -227,26 +214,19 @@ public class GameManager extends GameCore {
      */
     private void checkInput(long elapsedTime) {
         Player plaPlayer = (Player)tmMap.getPlayer();
+        
         // Checks if exit has been pressed
         if (gaExit.isPressed()) {
             stop();
         }
        
-        if(gaExitGame.isPressed() && bPause){
+        // Checks if exit within pause menu is pressed
+        if(gaExitGame.isPressed() && bPause) {
             stop();
         }
-        if (gaPause.isPressed() && rmResourceManager.iCurrentMap == 4 ){
-            if(!bPause){
-                bPause = true;
-               // rmResourceManager.spawnMenu(plaPlayer.getX()-160, 500, tmMap, false);
-                
-            }
-            else{
-                bPause = false;
-                //rmResourceManager.spawnMenu(plaPlayer.getX()-160, 500, tmMap, true);
-            }
-        }
-        if(gaWakeUp.isPressed() && bPause){
+        
+        // Checks if wake up button within pause menu is pressed
+        if(gaWakeUp.isPressed() && bPause) {
             bPause = false;
             rmResourceManager.iCurrentMap = 0;
             tmrRenderer.setBackground(lklBackgrounds.get
@@ -328,14 +308,27 @@ public class GameManager extends GameCore {
                         if (plaPlayer.getFacingRight()) { // To the right
                             rmResourceManager.spawnArrow(
                                     plaPlayer.getX() + TileMapRenderer.tilesToPixels(1) + 15f, 
-                                    plaPlayer.getY(), 
+                                    plaPlayer.getY() + TileMapRenderer.tilesToPixels(1), 
                                     1f, -.2f, tmMap);
                         }
                         else {
                             rmResourceManager.spawnArrow( // To the left
                                     plaPlayer.getX() - TileMapRenderer.tilesToPixels(1) - 15f, 
-                                    plaPlayer.getY(), 
+                                    plaPlayer.getY() + TileMapRenderer.tilesToPixels(1), 
                                     -1f, -.2f, tmMap);
+                        }
+                    }
+                    
+                    // Checks if pause button is pressed
+                    if (gaPause.isPressed()) {
+                        
+                        if(!bPause) {
+                            bPause = true;
+
+                        }
+                        
+                        else {
+                            bPause = false;
                         }
                     }
                     
