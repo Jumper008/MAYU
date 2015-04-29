@@ -251,7 +251,8 @@ public class ResourceManager {
         }
 
         // add the player to the map
-        Sprite player = (Sprite)sprPlayerSprite.clone();
+        Creature player = (Creature)sprPlayerSprite.clone();
+        player.setHealth(1000);
         switch(iCurrentMap-1) {
             case 0:
             case 1:

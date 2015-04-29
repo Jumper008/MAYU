@@ -33,13 +33,15 @@ public abstract class Creature extends Sprite {
     private Animation aniDeadRight;
     private int iState;
     private long lStateTime;
+    private int iHealth;
 
     /**
      * Creature
      * 
      * Parameterized Constructor
      * 
-     * Creates a new Creature with the specified Animations.
+     * Creates a new Creature with the specified Animations. With iHealth set 
+     * as 2.
      * 
      * @param aniWalkLeft is an object of class <code>Animation</code>
      * @param aniWalkRight is an object of class <code>Animation</code>
@@ -60,8 +62,39 @@ public abstract class Creature extends Sprite {
         this.aniIdleLeft = aniIdleLeft;
         this.aniIdleRight = aniIdleRight;
         iState = iSTATE_NORMAL;
+        iHealth = 2;
     }
-
+    
+    /**
+     * Creature
+     * 
+     * Parameterized Constructor 2
+     * 
+     * Creates a new Creature with the specified Animations and Health.
+     * 
+     * @param aniWalkLeft is an object of class <code>Animation</code>
+     * @param aniWalkRight is an object of class <code>Animation</code>
+     * @param aniDeadLeft is an object of class <code>Animation</code>
+     * @param aniDeadRight is an object of class <code>Animation</code>
+     * @param aniIdleLeft is an object of class <code>Animation</code>
+     * @param aniIdleRight is an object of class <code>Animation</code>
+     * @param iHealth is an object of class <code>int</code>
+     */
+    public Creature(Animation aniWalkLeft, Animation aniWalkRight,
+        Animation aniDeadLeft, Animation aniDeadRight, Animation aniIdleLeft, 
+        Animation aniIdleRight, int iHealth)
+    {
+        super(aniWalkRight);
+        this.aniWalkLeft = aniWalkLeft;
+        this.aniWalkRight = aniWalkRight;
+        this.aniDeadLeft = aniDeadLeft;
+        this.aniDeadRight = aniDeadRight;
+        this.aniIdleLeft = aniIdleLeft;
+        this.aniIdleRight = aniIdleRight;
+        iState = iSTATE_NORMAL;
+        this.iHealth = iHealth;
+    }
+    
     /**
      * clone
      * 
@@ -142,6 +175,31 @@ public abstract class Creature extends Sprite {
                 setVelocityY(0);
             }
         }
+    }
+    
+    /**
+     * setHealth
+     * 
+     * Sets the amount of health for the creature.
+     * 
+     * If health reaches 0, and the method isAlive is called, the State of the
+     * creature will be changed to iSTATE_DYING
+     * 
+     * @param iHealth 
+     */
+    public void setHealth(int iHealth) {
+        this.iHealth = iHealth;
+    }
+    
+    /**
+     * getHealth
+     * 
+     * Returns the amount of health points the creature has left
+     * 
+     * @return object of class <code>int</code>
+     */
+    public int getHealth() {
+        return iHealth;
     }
 
     /**

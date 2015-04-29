@@ -370,6 +370,8 @@ public class GameManager extends GameCore {
         if(rmResourceManager.iCurrentMap == 4){
          gra2D_G.drawString("Score: " + iScore, 10, 20);
          gra2D_G.drawString("Life: " + iLife, 10, 45);
+         Player plaPlayer = (Player) tmMap.getPlayer();
+         gra2D_G.drawString("Health: " + plaPlayer.getHealth(), 10, 135);
         }
         
         //JUST SOME TESTING. ERASE PLEASE.
@@ -589,6 +591,13 @@ public class GameManager extends GameCore {
             Sprite sprite = (Sprite)iteI.next();
                 if (sprite instanceof Creature) {
                     Creature creature = (Creature)sprite;
+                    
+                    //Show dying animation if creature has run out of health
+                    if (creature.getHealth() == 0) {
+                        creature.setState(Creature.iSTATE_DYING);
+                        creature.setHealth(-1);
+                    }
+                    
                     if (creature.getState() == Creature.iSTATE_DEAD) {
                         iteI.remove();
                     }
@@ -678,13 +687,20 @@ public class GameManager extends GameCore {
             // Check if arrow collided with an enemy
             Sprite sprCollision = getSpriteCollision( creCreature );
             if ( sprCollision != null ) {
-                tmMap.removeSprite(sprCollision);
-                creCreature.setVelocityX(0f);
+                if (sprCollision instanceof Creature) {
+                    Creature creAux = (Creature)sprCollision;
+                    creAux.setHealth(creAux.getHealth() - 1);
+                    creCreature.setVelocityX(0f);
+                }
+                else {
+                    tmMap.removeSprite(sprCollision);
+                    creCreature.setVelocityX(0f);
+                }
             }
             
             // Check if arrow stopped
             if (creCreature.getVelocityX() == 0) { //Eliminate arrows once they have stopped
-                creCreature.setState(Weapon.iSTATE_DEAD);
+                creCreature.setState(Weapon.iSTATE_DYING); 
                 bArrow = false;
             }
         }
@@ -720,23 +736,28 @@ public class GameManager extends GameCore {
         else if (sprCollisionSprite instanceof Creature) {
             Creature creBadguy = (Creature)sprCollisionSprite;
             if (bCanKill) {
-                // kill the badguy and make player bounce
-                smSoundManager.play(souBoopSound);
-                creBadguy.setState(Creature.iSTATE_DYING);
-                plaPlayer.setY(creBadguy.getY() - plaPlayer.getHeight());
-                plaPlayer.jump(true);
-                iScore += 10;
+//                // Subtract health points from the badguy and make player bounce
+//                smSoundManager.play(souBoopSound);
+//                creBadguy.setHealth(creBadguy.getHealth() - 1);
+//                plaPlayer.setY(creBadguy.getY() - plaPlayer.getHeight());
+//                plaPlayer.jump(true);
+//                iScore += 10;
             }
             else {
-                // player dies!
-                //plaPlayer.setState(Creature.iSTATE_DYING);
+                // player gets hurt!
                 if(iLife > 1){
-                    iLife -= 1;
-                    plaPlayer.setState(Creature.iSTATE_DYING);
+                    plaPlayer.setHealth(plaPlayer.getHealth() - 1);
+                    if (plaPlayer.getHealth() < 1) {
+                        plaPlayer.setState(Creature.iSTATE_DYING);
+                        iLife -= 1;
+                    }
                 }
                 else{
-                  iLife -= 1;  
-                  plaPlayer.setState(Creature.iSTATE_DYING);
+                  plaPlayer.setHealth(plaPlayer.getHealth() - 1);
+                    if (plaPlayer.getHealth() < 1) {
+                        plaPlayer.setState(Creature.iSTATE_DYING);
+                        iLife -= 1;  
+                    }
                 }
             }
         }
