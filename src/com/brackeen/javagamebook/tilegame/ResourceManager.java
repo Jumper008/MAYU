@@ -568,7 +568,8 @@ public class ResourceManager {
      */
       public void spawnMenu(float fPosX, float fPosY, TileMap tmMap, boolean bPausaMenu) {
         
-        if(!bPausaMenu){
+        if(!bPausaMenu) {
+        
         sprPauseMenu.setX(fPosX);
         sprPauseMenu.setY(fPosY);
        

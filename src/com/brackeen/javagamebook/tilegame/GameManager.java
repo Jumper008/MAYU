@@ -76,9 +76,7 @@ public class GameManager extends GameCore {
     private int iLife;
     private int iScore;
     private boolean bPause;
-    private boolean bPausaMenu;
-    //private Sprite SprLife;
-    //private LinkedList<Sprite> lklLife;
+    private boolean bArrow;
     
 
     /**
@@ -123,11 +121,6 @@ public class GameManager extends GameCore {
         
         tmrRenderer.setBackground(lklBackgrounds.get(0));
         
-            //Vidas
-        for(int i=0; i<iLife ; i++){
-            
-        }
-        
         // Controls
         fInitialJumpY = 0;
         
@@ -148,8 +141,9 @@ public class GameManager extends GameCore {
         
         //Pause
         bPause = false;
-        //Pausamenu
-        bPausaMenu = false;
+        
+        //Arrow
+        bArrow = false;
     }
     
     /**
@@ -301,8 +295,9 @@ public class GameManager extends GameCore {
                         plaPlayer.setJumpAccelHeightReached(true); // Prevent the player from jumping in mid-air
                     }
                     
-                    if (gaAttack.isPressed() && !bPause) {
+                    if (gaAttack.isPressed() && !bPause && !bArrow) {
                         // Shoot Arrows
+                        bArrow = true;
                         if (plaPlayer.getFacingRight()) { // To the right
                             rmResourceManager.spawnArrow(
                                     plaPlayer.getX() + TileMapRenderer.tilesToPixels(1) + 10f, 
@@ -339,7 +334,7 @@ public class GameManager extends GameCore {
          //Update life and score
         if(rmResourceManager.iCurrentMap == 4){
          gra2D_G.drawString("Score: " + iScore, 10, 20);
-         gra2D_G.drawString("Life: " + iLife, 10, 45);   
+         gra2D_G.drawString("Life: " + iLife, 10, 45);
         }
         
         
@@ -655,7 +650,8 @@ public class GameManager extends GameCore {
             
             // Check if arrow stopped
             if (creCreature.getVelocityX() == 0) { //Eliminate arrows once they have stopped
-                creCreature.setState(Weapon.iSTATE_DEAD); 
+                creCreature.setState(Weapon.iSTATE_DEAD);
+                bArrow = false;
             }
         }
         
