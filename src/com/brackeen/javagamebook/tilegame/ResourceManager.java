@@ -256,27 +256,29 @@ public class ResourceManager {
         switch(iCurrentMap-1) {
             case 0:
             case 1:
-            case 2: { // Main Menus
+            case 2:
+            case 3:
+            case 4: { // Main Menus
                 player.setX(-TileMapRenderer.tilesToPixels(3));
                 player.setY(0);
                 break;
             }
-            case 3: { // Map 4
+            case 5: { // Map 6
                 player.setX(TileMapRenderer.tilesToPixels(3));
                 player.setY(TileMapRenderer.tilesToPixels(14));
                 break;
             }
-            case 4: { // Map 5
+            case 6: { // Map 7
                 player.setX(TileMapRenderer.tilesToPixels(100));
                 player.setY(TileMapRenderer.tilesToPixels(30));
                 break;
             }
-            case 5: { // Map 6
+            case 7: { // Map 8
                 player.setX(TileMapRenderer.tilesToPixels(31));
                 player.setY(TileMapRenderer.tilesToPixels(40));
                 break;
             }
-            case 6: { // Map 7
+            case 8: { // Map 9
                 player.setX(TileMapRenderer.tilesToPixels(3));
                 player.setY(TileMapRenderer.tilesToPixels(14));
                 break;

@@ -74,6 +74,9 @@ public class GameManager extends GameCore {
     private GameAction gaExitGame;
     private GameAction gaEnter;
     private GameAction gaPlay;
+    private GameAction gaControls;
+    private GameAction gaOptions;
+    private GameAction gaReturn;
     
     private float fInitialJumpY;    // States from where the character started to jump
     
@@ -82,6 +85,7 @@ public class GameManager extends GameCore {
     private boolean bPause;
     private boolean bArrow;
     private Sequence seqSequence1;
+    private long lTimer;
     
     /**
      * init
@@ -109,7 +113,8 @@ public class GameManager extends GameCore {
         
         // load map images in order
             // Main menu
-        //lklBackgrounds.add(rmResourceManager.loadImage("Habitacion_Principal_Nubes.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Logo_Principal.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Habitacion_Principal_Nubes.jpg"));
         lklBackgrounds.add(rmResourceManager.loadImage("Habitacion_Principal.jpg"));
         lklBackgrounds.add(rmResourceManager.loadImage("Escritorio.jpg"));
         lklBackgrounds.add(rmResourceManager.loadImage("Controles.jpg"));
@@ -152,7 +157,10 @@ public class GameManager extends GameCore {
         bPause = false;
         
         //Arrow
-        bArrow = false;  
+        bArrow = false;
+        
+        //Timer
+        lTimer = 0;
     }
     
     /**
@@ -177,7 +185,7 @@ public class GameManager extends GameCore {
         gaJump = new GameAction("jump");/*,
             GameAction.iDETECT_INITAL_PRESS_ONLY);*/
         gaJumpRelease = new GameAction("jumpRelease", 
-                GameAction.iDETECT_RELEASE_ONLY);
+            GameAction.iDETECT_RELEASE_ONLY);
         gaAttack = new GameAction("attack",
             GameAction.iDETECT_INITAL_PRESS_ONLY);
         gaExit = new GameAction("exit",
@@ -191,8 +199,14 @@ public class GameManager extends GameCore {
         gaExitGame = new GameAction("ExitGame",
             GameAction.iDETECT_INITAL_PRESS_ONLY);
         gaEnter = new GameAction("Enter", 
-                GameAction.iDETECT_INITAL_PRESS_ONLY);
+            GameAction.iDETECT_INITAL_PRESS_ONLY);
         gaPlay = new GameAction("Play", 
+            GameAction.iDETECT_INITAL_PRESS_ONLY);
+        gaOptions = new GameAction("Options", 
+            GameAction.iDETECT_INITAL_PRESS_ONLY);
+        gaControls = new GameAction("Controls", 
+            GameAction.iDETECT_INITAL_PRESS_ONLY);
+        gaReturn = new GameAction("Return", 
             GameAction.iDETECT_INITAL_PRESS_ONLY);
 
         imInputManager = new InputManager(
@@ -209,6 +223,10 @@ public class GameManager extends GameCore {
         imInputManager.mapToKey(gaWakeUp, KeyEvent.VK_W);
         imInputManager.mapToKey(gaExitGame, KeyEvent.VK_Q);
         imInputManager.mapToKey(gaEnter, KeyEvent.VK_ENTER);
+        imInputManager.mapToKey(gaPlay, KeyEvent.VK_J);
+        imInputManager.mapToKey(gaOptions, KeyEvent.VK_O);
+        imInputManager.mapToKey(gaControls, KeyEvent.VK_C);
+        imInputManager.mapToKey(gaReturn, KeyEvent.VK_BACK_SPACE);
     }
 
     /**
@@ -234,7 +252,7 @@ public class GameManager extends GameCore {
         // Checks if wake up button within pause menu is pressed
         if(gaWakeUp.isPressed() && bPause) {
             bPause = false;
-            rmResourceManager.iCurrentMap = 0;
+            rmResourceManager.iCurrentMap = 2;
             tmrRenderer.setBackground(lklBackgrounds.get
                      (rmResourceManager.getICurrentMap()));
             tmMap = rmResourceManager.loadNextMap();
@@ -248,30 +266,50 @@ public class GameManager extends GameCore {
         if (plaPlayer.isAlive()) {
             float velocityX = 0;
             switch(rmResourceManager.getICurrentMap()-1) {
-                // Main menu
+                // Logo preview
                 case 0: {
-                    if (gaMoveLeft.isPressed() && iLife != 0) {
+                    lTimer ++;
+                    if (lTimer == 500) {
+                        tmrRenderer.setBackground(lklBackgrounds.get
+                                (rmResourceManager.getICurrentMap()));
+                        tmMap = rmResourceManager.loadNextMap();
+                    }
+                    break;
+                }
+                // Main menu with game name
+                case 1: {
+                    if (gaEnter.isPressed()) {
+                        tmrRenderer.setBackground(lklBackgrounds.get
+                                (rmResourceManager.getICurrentMap()));
+                        tmMap = rmResourceManager.loadNextMap();
+                    }
+                    break;
+                }
+                // Main menu
+                case 2: {
+                    if (gaPlay.isPressed() && iLife != 0) {
                         //mpMidiPlayer.close();
-                        rmResourceManager.iCurrentMap = 3;
+                        rmResourceManager.iCurrentMap = 5;
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
                     }
-                    if (gaJump.isPressed()) {
+                    if (gaOptions.isPressed()) {
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
                     }
-                     /*if (gaEnter.isPressed()) {
-                        tmrRenderer.setBackground(lklBackgrounds.get
-                                (rmResourceManager.getICurrentMap()));
-                        tmMap = rmResourceManager.loadNextMap();
-                    }*/
                     break;
                 }
                 // Settings
-                case 1: {
-                    if (gaJump.isPressed()) {
+                case 3: {
+                    if (gaControls.isPressed()) {
+                        tmrRenderer.setBackground(lklBackgrounds.get
+                                (rmResourceManager.getICurrentMap()));
+                        tmMap = rmResourceManager.loadNextMap();
+                    }
+                    if (gaReturn.isPressed()) {
+                        rmResourceManager.iCurrentMap = 2;
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
@@ -279,9 +317,9 @@ public class GameManager extends GameCore {
                     break;
                 }
                 // Controls
-                case 2: {
-                    if (gaJump.isPressed()) {
-                        rmResourceManager.iCurrentMap = 0;
+                case 4: {
+                    if (gaReturn.isPressed()) {
+                        rmResourceManager.iCurrentMap = 3;
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
@@ -289,7 +327,7 @@ public class GameManager extends GameCore {
                     break;
                 }
                 
-                case 3:{
+                case 5: {
                     
                 }
                 default: {
@@ -363,7 +401,7 @@ public class GameManager extends GameCore {
         
          gra2D_G.setColor(Color.black);
         
-        if(bPause){
+        if(bPause) {
             gra2D_G.setColor(Color.decode("#A3A375"));
             gra2D_G.fill3DRect((smScreen.getWidth()/2) - 180, 180, 350, 250, bPause);
             gra2D_G.setColor(Color.black);
@@ -377,7 +415,7 @@ public class GameManager extends GameCore {
         }
         
          //Update life and score
-        if(rmResourceManager.iCurrentMap == 4){
+        if(rmResourceManager.iCurrentMap > 5){
          gra2D_G.drawString("Score: " + iScore, 10, 20);
          gra2D_G.drawString("Life: " + iLife, 10, 45);
          Player plaPlayer = (Player) tmMap.getPlayer();
@@ -398,7 +436,7 @@ public class GameManager extends GameCore {
                 fPosY = sprOtherSprite.getY();
             }
         }
-        if(rmResourceManager.iCurrentMap == 4){
+        if(rmResourceManager.iCurrentMap > 5){
         gra2D_G.drawString("Weapons on screen: " + iCantWeapons, 10, 75);
         gra2D_G.drawString("Weapons X: " + fPosX, 10, 95);
         gra2D_G.drawString("Weapons Y" + fPosY, 10, 115);
@@ -581,7 +619,7 @@ public class GameManager extends GameCore {
         }
         
         if(iLife == 0){
-            rmResourceManager.iCurrentMap = 7;
+            rmResourceManager.iCurrentMap = 9;
             tmrRenderer.setBackground(lklBackgrounds.get
                      (rmResourceManager.getICurrentMap()));
             tmMap = rmResourceManager.loadNextMap();

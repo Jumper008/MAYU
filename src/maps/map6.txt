@@ -1,59 +1,15 @@
-# Map file for tile-based game
-# (Lines that start with '#' are comments)
-# The tiles are:
-#   (Space) Empty tile
-#   A..Z    Tiles A through Z
-#   o       Star
-#   !       Music Note
-#   *       Goal
-#   1       Bad Guy 1 (grub)
-#   1       Bad Guy 1 (fly)
-
-
-
-                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                                                                  
-                                                                  
-                                                                  
-                                                                  
-                                                                  
-                                     1                 1         *
-                     LLLL    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                              MMM
-              LLLLL            MM
-                                M
-                                M
-                      LLLLLL    M
-                                M
-             LLLLLL             M
-                                M
-                                M
-        LLLL                    M
-                                M
-                                M
-                 LLLLL          M
-                                M
-         LLLL                   M
-                                M
-  LLLL                          M 
-                                M 
-          LLLLLL                M 
-                                M
-                     LLLL       M
-                                M
-              LLLL              M 
-                                M
-                                M
-       LLLLLL                   M
-                                M
-                       MMMMMMMMMM
-          LLLLL                  
-                                 
-  LLLL                 
-          
-          LLLL        LLMMLLLLLLL
-                       MMM      L
-                       MM        
-                       MM        
-                       MMIIIIIIII
-                       MMMMMMMMMM
+                                                                                                                                                                                                                                                                                                                                                                            MMMMMMMMMMMMM
+                                                                                                                                                                                                                                                                                                                                                                            MMMMMMMMMMMMM
+                                                                                                                                                                                                                                                                                                                                                                            MMMMMMMMMMMMM
+                                                                                                                                                                   1   1                    1   1                                                                                                                                                                           MMMMMMMMMMMMM
+                                                                                                                                                                 LLLLLLLLL               LLLLLLLLLL                                                                                                                                                                         MMMMMMMMMMMMM
+                                                                                                                                                                                                                                                                                                                                                                            MMMMMMMMMMMMM
+                                                                                                                                                                                                                                                                                                                                                                             MMMMMMMMMMMM
+                                                                               MM                                                                                                                                                                                                                                                                                           MMMMMMMMMMMMM
+                                                    A                          MMMMM                                                                                                                                                                                                                                                                                         MMMMMMMMMMMM
+                                                    MM              LLLLL      MMMMM                                                                                                                                                                                                                                                                                        MMMMMMMMMMMMM
+                                                  MMMMM                        MMMMM                  A                                     A     A                         A         A                                                                                                                                                                                     MMMMMMMMMMMMM
+                                                  MMMMM                        MMMMMMM              LLLLL                                  LLL   LLL                        LL       LL                                                                                                                                                            A  1                        MMMMMMMMMM
+                                                 MMMMMMM              LLLL     MMMMMMM                                                                                                                            LLLL     L     LLLL                               MAAAAAAAAAAAAAAAAAAAM                                                          LLLLLLL     1   1           MMMMMMMMMM
+         7    MAAAAAM   1 1                     MMMMMMMM                       MMMMMMMMM                     1                                     1                               1                                                                               MMM                 MMM                                                                   MAAAAAAAM       * MMMMMMMMMM
+BBBBBBBBBBBBBBBIIIIIJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ        MMMMMMMMMJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ                           JJJJJJJJJJJJJJJJJJJJJJJJJJJJJIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJJJJJJMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMIIIIIIIMMMMMMMMMMMMMMMMMMMM
