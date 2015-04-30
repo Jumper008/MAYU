@@ -14,8 +14,6 @@ import com.brackeen.javagamebook.input.*;
 import com.brackeen.javagamebook.test.GameCore;
 import com.brackeen.javagamebook.tilegame.sprites.*;
 import java.util.LinkedList;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 
 /**
  * GameManager
@@ -55,6 +53,7 @@ public class GameManager extends GameCore {
     private Point pPointCache = new Point();
     private TileMap tmMap;
     private MidiPlayer mpMidiPlayer;
+    private MidiPlayer mpVillageMidiPlayer;
     private SoundManager smSoundManager;
     private ResourceManager rmResourceManager;
     private Sound souPrizeSound;
@@ -74,6 +73,7 @@ public class GameManager extends GameCore {
     private GameAction gaWakeUp;
     private GameAction gaExitGame;
     private GameAction gaEnter;
+    private GameAction gaPlay;
     
     private float fInitialJumpY;    // States from where the character started to jump
     
@@ -81,6 +81,7 @@ public class GameManager extends GameCore {
     private int iScore;
     private boolean bPause;
     private boolean bArrow;
+    private Sequence seqSequence1;
     
     /**
      * init
@@ -140,9 +141,12 @@ public class GameManager extends GameCore {
         // start music
         mpMidiPlayer = new MidiPlayer();
         Sequence seqSequence =
-            mpMidiPlayer.getSequence("sounds/music.midi");
+            mpMidiPlayer.getSequence("sounds/Main_Menu.mid");
         mpMidiPlayer.play(seqSequence, true);
-        toggleDrumPlayback();
+        
+        mpVillageMidiPlayer = new MidiPlayer();
+        seqSequence1 =
+            mpVillageMidiPlayer.getSequence("sounds/Village.mid");
         
         //Pause
         bPause = false;
@@ -188,6 +192,8 @@ public class GameManager extends GameCore {
             GameAction.iDETECT_INITAL_PRESS_ONLY);
         gaEnter = new GameAction("Enter", 
                 GameAction.iDETECT_INITAL_PRESS_ONLY);
+        gaPlay = new GameAction("Play", 
+            GameAction.iDETECT_INITAL_PRESS_ONLY);
 
         imInputManager = new InputManager(
             smScreen.getFullScreenWindow());
@@ -245,6 +251,7 @@ public class GameManager extends GameCore {
                 // Main menu
                 case 0: {
                     if (gaMoveLeft.isPressed() && iLife != 0) {
+                        //mpMidiPlayer.close();
                         rmResourceManager.iCurrentMap = 3;
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
@@ -286,6 +293,8 @@ public class GameManager extends GameCore {
                     
                 }
                 default: {
+                    //mpVillageMidiPlayer.play(seqSequence1, true);
+                    
                     if (gaMoveLeft.isPressed()) {
                         velocityX-=plaPlayer.getMaxSpeed();
                         plaPlayer.setFacingRight(false);
