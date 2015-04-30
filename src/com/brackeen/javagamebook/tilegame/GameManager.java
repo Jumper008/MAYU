@@ -146,12 +146,12 @@ public class GameManager extends GameCore {
         // start music
         mpMidiPlayer = new MidiPlayer();
         Sequence seqSequence =
-            mpMidiPlayer.getSequence("sounds/Main_Menu.mid");
+            mpMidiPlayer.getSequence("sounds/Main_menu1.mid");
         mpMidiPlayer.play(seqSequence, true);
         
         mpVillageMidiPlayer = new MidiPlayer();
         seqSequence1 =
-            mpVillageMidiPlayer.getSequence("sounds/Village.mid");
+            mpVillageMidiPlayer.getSequence("sounds/Village2.mid");
         
         //Pause
         bPause = false;
@@ -288,7 +288,8 @@ public class GameManager extends GameCore {
                 // Main menu
                 case 2: {
                     if (gaPlay.isPressed() && iLife != 0) {
-                        //mpMidiPlayer.close();
+                        mpMidiPlayer.close();
+                        mpVillageMidiPlayer.play(seqSequence1, true);
                         rmResourceManager.iCurrentMap = 5;
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
@@ -331,7 +332,6 @@ public class GameManager extends GameCore {
                     
                 }
                 default: {
-                    //mpVillageMidiPlayer.play(seqSequence1, true);
                     
                     if (gaMoveLeft.isPressed()) {
                         velocityX-=plaPlayer.getMaxSpeed();
@@ -413,6 +413,25 @@ public class GameManager extends GameCore {
             
             
         }
+        //play
+        if(rmResourceManager.iCurrentMap == 3){
+           gra2D_G.setColor(Color.black);
+           gra2D_G.drawString("Play - J", (smScreen.getWidth()/2) - 50, 270);
+           gra2D_G.drawString("Options - O", (smScreen.getWidth()/2) + 210,(smScreen.getHeight()/2) + 50);
+           
+        }
+        //Desk
+        if(rmResourceManager.iCurrentMap == 4){
+           gra2D_G.setColor(Color.black);
+           gra2D_G.drawString("Controls - C",600, 130);
+           gra2D_G.drawString("Return - Back space",30 ,580 );
+        }
+        //Computer/controles
+        if(rmResourceManager.iCurrentMap == 5){
+           gra2D_G.setColor(Color.black);
+           gra2D_G.drawString("Return - Back space",10 ,30 ); 
+        }
+        
         
          //Update life and score
         if(rmResourceManager.iCurrentMap > 5){

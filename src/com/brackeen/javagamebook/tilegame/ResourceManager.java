@@ -37,6 +37,7 @@ public class ResourceManager {
     private Sprite sprFlySprite;
     private Sprite sprArrowSprite;
     private Sprite sprPauseMenu;
+    private Sprite sprArcherSprite;
 
     /**
      * ResourceManager
@@ -376,6 +377,12 @@ public class ResourceManager {
             loadImage("Malo_espada_caminando_4.png"),
             loadImage("Malo_espada_caminando_5.png"),
             loadImage("Malo_espada_caminando_6.png"),
+            loadImage("MA_1.png"),
+            loadImage("MA_2.png"),
+            loadImage("MA_3.png"),
+            loadImage("MA_4.png"),
+            loadImage("MA_5.png"),
+            loadImage("MA_6.png"),
             getMirrorImage(loadImage("flecha.png")),
             loadImage("flecha.png"),
             loadImage("flecha.png"),
@@ -401,7 +408,9 @@ public class ResourceManager {
         Animation[] aniArrGrubAnim = new Animation[4];
         Animation[] aniArrArrowAnim = new Animation[4];
         Animation[] aniArrPMenu = new Animation[4];
-        for (int iI=0; iI<4; iI++) {
+        Animation[] aniArrArcherAnim = new Animation[4];
+        
+       for (int iI=0; iI<4; iI++) {
             aniArrPlayerCaminAnim[iI] = createPlayerAnim(imaMatImages[iI][0], 
                     imaMatImages[iI][1], imaMatImages[iI][2],imaMatImages[iI][3] ,
                     imaMatImages[iI][4],imaMatImages[iI][5]);
@@ -414,9 +423,13 @@ public class ResourceManager {
                     imaMatImages[iI][14],imaMatImages[iI][15],
                     imaMatImages[iI][16],imaMatImages[iI][17],
                     imaMatImages[iI][18]);
-            aniArrArrowAnim[iI] = createWeaponAnim(imaMatImages[iI][19], 
-                    imaMatImages[iI][19], imaMatImages[iI][19]);
-            aniArrPMenu[iI] = createMenuAnim(imaMatImages[iI][22]);
+             aniArrArcherAnim[iI] = createGrubAnim(imaMatImages[iI][19], 
+                    imaMatImages[iI][20],imaMatImages[iI][21],
+                    imaMatImages[iI][22],imaMatImages[iI][23],
+                    imaMatImages[iI][24]);
+            aniArrArrowAnim[iI] = createWeaponAnim(imaMatImages[iI][25], 
+                    imaMatImages[iI][25], imaMatImages[iI][25]);
+            aniArrPMenu[iI] = createMenuAnim(imaMatImages[iI][28]);
         }
 
         // create creature sprites
@@ -427,6 +440,9 @@ public class ResourceManager {
                 aniArrFlyAnim[2], aniArrFlyAnim[3], aniArrFlyAnim[0], 
                 aniArrFlyAnim[1]);
         sprGrubSprite = new Grub(aniArrGrubAnim[0], aniArrGrubAnim[1],
+                aniArrGrubAnim[2], aniArrGrubAnim[3], aniArrGrubAnim[0], 
+                aniArrGrubAnim[1]);
+        sprArcherSprite = new Archer(aniArrGrubAnim[0], aniArrGrubAnim[1],
                 aniArrGrubAnim[2], aniArrGrubAnim[3], aniArrGrubAnim[0], 
                 aniArrGrubAnim[1]);
         sprArrowSprite = new Weapon(aniArrArrowAnim[0], aniArrArrowAnim[1], 
