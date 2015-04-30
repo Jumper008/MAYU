@@ -56,8 +56,6 @@ public class GameManager extends GameCore {
     private MidiPlayer mpVillageMidiPlayer;
     private SoundManager smSoundManager;
     private ResourceManager rmResourceManager;
-    private Sound souPrizeSound;
-    private Sound souBoopSound;
     private InputManager imInputManager;
     private TileMapRenderer tmrRenderer;
     private LinkedList<Image> lklBackgrounds;
@@ -86,6 +84,18 @@ public class GameManager extends GameCore {
     private boolean bArrow;
     private Sequence seqSequence1;
     private long lTimer;
+    
+    // Sounds
+    private Sound souPrizeSound;
+    private Sound souBoopSound;
+    private Sound souPause;
+    private Sound souUnpause;
+    private Sound souMenuSelect;
+    private Sound souPlayerShoot;
+    private Sound souPlayerHurt;    // Sin implementar (necesita más tiempo entre el daño que puede recibir un jugador)
+    private Sound souArrowHit;
+    private Sound souEnemyDeath;
+    private Sound souBossImmune;
     
     /**
      * init
@@ -142,6 +152,13 @@ public class GameManager extends GameCore {
         smSoundManager = new SoundManager(afPLAYBACK_FORMAT);
         souPrizeSound = smSoundManager.getSound("sounds/prize.wav");
         souBoopSound = smSoundManager.getSound("sounds/boop2.wav");
+        souPause = smSoundManager.getSound("sounds/pause_on.wav");
+        souUnpause = smSoundManager.getSound("sounds/pause_off.wav");
+        souEnemyDeath = smSoundManager.getSound("sounds/enemy_death.wav");
+        souPlayerShoot = smSoundManager.getSound("sounds/player_shoot.wav");
+        souMenuSelect = smSoundManager.getSound("sounds/menu_select.wav");
+        souArrowHit = smSoundManager.getSound("sounds/arrow_hit2.wav");
+        souBossImmune = smSoundManager.getSound("sounds/boss_invincible.wav");
 
         // start music
         mpMidiPlayer = new MidiPlayer();
@@ -246,11 +263,13 @@ public class GameManager extends GameCore {
        
         // Checks if exit within pause menu is pressed
         if(gaExitGame.isPressed() && bPause) {
+            smSoundManager.play(souMenuSelect);
             stop();
         }
         
         // Checks if wake up button within pause menu is pressed
         if(gaWakeUp.isPressed() && bPause) {
+            smSoundManager.play(souMenuSelect);
             bPause = false;
             rmResourceManager.iCurrentMap = 2;
             tmrRenderer.setBackground(lklBackgrounds.get
@@ -279,6 +298,7 @@ public class GameManager extends GameCore {
                 // Main menu with game name
                 case 1: {
                     if (gaEnter.isPressed()) {
+                        smSoundManager.play(souMenuSelect);
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
@@ -288,6 +308,7 @@ public class GameManager extends GameCore {
                 // Main menu
                 case 2: {
                     if (gaPlay.isPressed() && iLife != 0) {
+                        smSoundManager.play(souMenuSelect);
                         mpMidiPlayer.close();
                         mpVillageMidiPlayer.play(seqSequence1, true);
                         rmResourceManager.iCurrentMap = 5;
@@ -296,6 +317,7 @@ public class GameManager extends GameCore {
                         tmMap = rmResourceManager.loadNextMap();
                     }
                     if (gaOptions.isPressed()) {
+                        smSoundManager.play(souMenuSelect);
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
@@ -305,6 +327,7 @@ public class GameManager extends GameCore {
                 // Settings
                 case 3: {
                     if (gaControls.isPressed()) {
+                        smSoundManager.play(souMenuSelect);
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
@@ -352,6 +375,7 @@ public class GameManager extends GameCore {
                     
                     if (gaAttack.isPressed() && !bPause && !bArrow) {
                         // Shoot Arrows
+                        smSoundManager.play(souPlayerShoot);
                         bArrow = true;
                         if (plaPlayer.getFacingRight()) { // To the right
                             rmResourceManager.spawnArrow(
@@ -371,11 +395,12 @@ public class GameManager extends GameCore {
                     if (gaPause.isPressed()) {
                         
                         if(!bPause) {
+                            smSoundManager.play(souPause);
                             bPause = true;
-
                         }
                         
                         else {
+                            smSoundManager.play(souUnpause);
                             bPause = false;
                         }
                     }
@@ -661,6 +686,7 @@ public class GameManager extends GameCore {
                     
                     //Show dying animation if creature has run out of health
                     if (creature.getHealth() == 0) {
+                        smSoundManager.play(souEnemyDeath);
                         creature.setState(Creature.iSTATE_DYING);
                         creature.setHealth(-1);
                     }
@@ -755,12 +781,16 @@ public class GameManager extends GameCore {
             Sprite sprCollision = getSpriteCollision( creCreature );
             if ( sprCollision != null ) {
                 if (sprCollision instanceof Creature) {
+                    smSoundManager.play(souArrowHit);
                     Creature creAux = (Creature)sprCollision;
                     creAux.setHealth(creAux.getHealth() - 1);
                     creCreature.setVelocityX(0f);
                 }
                 else {
-                    tmMap.removeSprite(sprCollision);
+                    if ( !(sprCollision instanceof PowerUp) ) {
+                        tmMap.removeSprite(sprCollision);
+                    }
+                    smSoundManager.play(souBossImmune);
                     creCreature.setVelocityX(0f);
                 }
             }
@@ -842,8 +872,8 @@ public class GameManager extends GameCore {
      * @param puPowerUp is an object of class <code>PowerUp</code>
      */
     public void acquirePowerUp(PowerUp puPowerUp) {
-        // remove it from the map
-        tmMap.removeSprite(puPowerUp);
+        // remove it from the map (not implemented, yet)
+        //tmMap.removeSprite(puPowerUp);
 
         if (puPowerUp instanceof PowerUp.Star) {
             // do something here, like give the player points
