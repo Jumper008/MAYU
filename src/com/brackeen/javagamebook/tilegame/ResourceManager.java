@@ -245,6 +245,9 @@ public class ResourceManager {
                 else if (cChar == '2') {
                     addSprite(tmNewMap, sprFlySprite, iX, iY);
                 }
+                else if (cChar == '3') {
+                    addSprite(tmNewMap, sprArcherSprite, iX, iY);
+                }
                 else if (cChar == '7') {
                     addSprite( tmNewMap, sprArrowSprite, iX, iY);
                 }
@@ -423,7 +426,7 @@ public class ResourceManager {
                     imaMatImages[iI][14],imaMatImages[iI][15],
                     imaMatImages[iI][16],imaMatImages[iI][17],
                     imaMatImages[iI][18]);
-             aniArrArcherAnim[iI] = createGrubAnim(imaMatImages[iI][19], 
+            aniArrArcherAnim[iI] = createGrubAnim(imaMatImages[iI][19], 
                     imaMatImages[iI][20],imaMatImages[iI][21],
                     imaMatImages[iI][22],imaMatImages[iI][23],
                     imaMatImages[iI][24]);
@@ -442,9 +445,9 @@ public class ResourceManager {
         sprGrubSprite = new Grub(aniArrGrubAnim[0], aniArrGrubAnim[1],
                 aniArrGrubAnim[2], aniArrGrubAnim[3], aniArrGrubAnim[0], 
                 aniArrGrubAnim[1]);
-        sprArcherSprite = new Archer(aniArrGrubAnim[0], aniArrGrubAnim[1],
-                aniArrGrubAnim[2], aniArrGrubAnim[3], aniArrGrubAnim[0], 
-                aniArrGrubAnim[1]);
+        sprArcherSprite = new Archer(aniArrArcherAnim[0], aniArrArcherAnim[1],
+                aniArrArcherAnim[2], aniArrArcherAnim[3], aniArrArcherAnim[0], 
+                aniArrArcherAnim[1]);
         sprArrowSprite = new Weapon(aniArrArrowAnim[0], aniArrArrowAnim[1], 
                 aniArrArrowAnim[2], aniArrArrowAnim[0], aniArrArrowAnim[0], 
                 aniArrArrowAnim[1]);
