@@ -463,28 +463,7 @@ public class GameManager extends GameCore {
          gra2D_G.drawString("Score: " + iScore, 10, 20);
          gra2D_G.drawString("Life: " + iLife, 10, 45);
          Player plaPlayer = (Player) tmMap.getPlayer();
-         gra2D_G.drawString("Health: " + plaPlayer.getHealth(), 10, 135);
-        }
-        
-        //JUST SOME TESTING. ERASE PLEASE.
-            // Displays the amount of weapons supposedly on screen as well as the position of the newest weapon on screen
-        Iterator itWeapons = tmMap.getSprites();
-        int iCantWeapons = 0;
-        float fPosX = 0;
-        float fPosY = 0;
-        while (itWeapons.hasNext()) {
-            Sprite sprOtherSprite = (Sprite)itWeapons.next();
-            if (sprOtherSprite instanceof Weapon) {
-                iCantWeapons++;
-                fPosX = sprOtherSprite.getX();
-                fPosY = sprOtherSprite.getY();
-            }
-        }
-        if(rmResourceManager.iCurrentMap > 5){
-        gra2D_G.drawString("Weapons on screen: " + iCantWeapons, 10, 75);
-        gra2D_G.drawString("Weapons X: " + fPosX, 10, 95);
-        gra2D_G.drawString("Weapons Y" + fPosY, 10, 115);
-        //END OF TESTING. ERASE PLEASE.
+         gra2D_G.drawString("Health: " + plaPlayer.getHealth(), 10, 75);
         }
     }
     
