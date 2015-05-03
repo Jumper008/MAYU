@@ -124,11 +124,11 @@ public class GameManager extends GameCore {
         
         // load map images in order
             // Main menu
-        lklBackgrounds.add(rmResourceManager.loadImage("Logo_Principal.jpg"));
-        lklBackgrounds.add(rmResourceManager.loadImage("Habitacion_Principal_Nubes.jpg"));
-        lklBackgrounds.add(rmResourceManager.loadImage("Habitacion_Principal.jpg"));
-        lklBackgrounds.add(rmResourceManager.loadImage("Escritorio.jpg"));
-        lklBackgrounds.add(rmResourceManager.loadImage("Controles.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Logo1.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Intento5.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("HP_1.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("escritorio1.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("controles1.jpg"));
             // First map
         lklBackgrounds.add(rmResourceManager.loadImage("Fondo_Villa_2_Negro.jpg"));
             // Second map
@@ -138,7 +138,7 @@ public class GameManager extends GameCore {
             // Fourth map
         lklBackgrounds.add(rmResourceManager.loadImage("first.jpg"));
             //GameOver map
-        lklBackgrounds.add(rmResourceManager.loadImage("Game Over.jpg"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Game Over1.jpg"));
         
         
         tmrRenderer.setBackground(lklBackgrounds.get(0));
