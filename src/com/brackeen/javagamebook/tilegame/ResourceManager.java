@@ -358,19 +358,21 @@ public class ResourceManager {
     public void loadCreatureSprites() {
 
         Image[][] imaMatImages = new Image[4][];
-
+        
+        int iHeight = TileMapRenderer.tilesToPixels(2);
+        
         // load left-facing images
         imaMatImages[0] = new Image[] {
-            getMirrorImage(loadImage("PC_1.png")),
-            getMirrorImage(loadImage("PC_2.png")),
-            getMirrorImage(loadImage("PC_3.png")),
-            getMirrorImage(loadImage("PC_4.png")),
-            getMirrorImage(loadImage("PC_5.png")),
-            getMirrorImage(loadImage("PC_6.png")),
-            getMirrorImage(loadImage("PP_1.png")),
-            getMirrorImage(loadImage("PP_2.png")),
-            getMirrorImage(loadImage("PP_3.png")),
-            getMirrorImage(loadImage("PP_4.png")),
+            getMirrorImage(loadImage("PC_1.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PC_2.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PC_3.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PC_4.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PC_5.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PC_6.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PP_1.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PP_2.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PP_3.png")).getScaledInstance(-1, iHeight, 0),
+            getMirrorImage(loadImage("PP_4.png")).getScaledInstance(-1, iHeight, 0),
             loadImage("Murcielago1.png"),
             loadImage("Murcielago2.png"),
             loadImage("Murcielago1.png"),
