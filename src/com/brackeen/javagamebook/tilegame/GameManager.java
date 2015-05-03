@@ -158,7 +158,7 @@ public class GameManager extends GameCore {
         souPlayerShoot = smSoundManager.getSound("sounds/player_shoot.wav");
         souMenuSelect = smSoundManager.getSound("sounds/menu_select.wav");
         souArrowHit = smSoundManager.getSound("sounds/arrow_hit2.wav");
-        souBossImmune = smSoundManager.getSound("sounds/boss_invincible.wav");
+        souBossImmune = smSoundManager.getSound("sounds/boss_invinsible.wav");
 
         // start music
         mpMidiPlayer = new MidiPlayer();
@@ -538,7 +538,7 @@ public class GameManager extends GameCore {
                                     TileMapRenderer.tilesToPixels(iY) 
                                     &&
                                     fNewY + sprSprite.getHeight() < 
-                                    TileMapRenderer.tilesToPixels(iY) + 10 
+                                    TileMapRenderer.tilesToPixels(iY) + 5 
                                     ) {
                                 if (sprSprite.getY() < fNewY) {
                                     pPointCache.setLocation(iX, iY); // stop the character on the platform
