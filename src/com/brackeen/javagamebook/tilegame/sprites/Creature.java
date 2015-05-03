@@ -2,6 +2,7 @@ package com.brackeen.javagamebook.tilegame.sprites;
 
 import java.lang.reflect.Constructor;
 import com.brackeen.javagamebook.graphics.*;
+import java.util.Calendar;
 
 /**
  * Creature
@@ -34,6 +35,7 @@ public abstract class Creature extends Sprite {
     private int iState;
     private long lStateTime;
     private int iHealth;
+    private Calendar calShootTime;
 
     /**
      * Creature
@@ -287,6 +289,30 @@ public abstract class Creature extends Sprite {
         if (iState == iSTATE_DYING && lStateTime >= iDIE_TIME) {
             setState(iSTATE_DEAD);
         }
+    }
+    
+    /**
+     * getShootTime
+     * 
+     * Returns calShootTime (this represents the time at which the last attack was issued)
+     * 
+     * @return object of class <code>Calendar</code>
+     */
+    public Calendar getShootTime() {
+        return calShootTime;
+    }
+    
+    /**
+     * updateShootTime
+     * 
+     * Updates calShootTime to the current time.
+     * 
+     * calShootTime represents the time at which the last attack was issued by
+     * the creature. (In the case of an archer, at which time he shot its
+     * last arrow.)
+     */
+    public void updateShootTime() {
+        calShootTime = Calendar.getInstance();
     }
 
 }

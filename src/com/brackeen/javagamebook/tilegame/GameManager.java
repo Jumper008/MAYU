@@ -13,6 +13,7 @@ import com.brackeen.javagamebook.sound.*;
 import com.brackeen.javagamebook.input.*;
 import com.brackeen.javagamebook.test.GameCore;
 import com.brackeen.javagamebook.tilegame.sprites.*;
+import java.util.Calendar;
 import java.util.LinkedList;
 
 /**
@@ -81,7 +82,7 @@ public class GameManager extends GameCore {
     private int iLife;
     private int iScore;
     private boolean bPause;
-    private boolean bArrow;
+    private boolean bArrowAvailable;
     private Sequence seqSequence1;
     private long lTimer;
     
@@ -174,7 +175,7 @@ public class GameManager extends GameCore {
         bPause = false;
         
         //Arrow
-        bArrow = false;
+        bArrowAvailable = true;
         
         //Timer
         lTimer = 0;
@@ -373,22 +374,37 @@ public class GameManager extends GameCore {
                         plaPlayer.setJumpAccelHeightReached(true); // Prevent the player from jumping in mid-air
                     }
                     
-                    if (gaAttack.isPressed() && !bPause && !bArrow) {
-                        // Shoot Arrows
-                        smSoundManager.play(souPlayerShoot);
-                        bArrow = true;
-                        if (plaPlayer.getFacingRight()) { // To the right
-                            rmResourceManager.spawnArrow(
-                                    plaPlayer.getX() + TileMapRenderer.tilesToPixels(1) + 15f, 
-                                    plaPlayer.getY() + TileMapRenderer.tilesToPixels(1), 
-                                    1f, -.2f, tmMap);
-                        }
-                        else {
-                            rmResourceManager.spawnArrow( // To the left
-                                    plaPlayer.getX() - TileMapRenderer.tilesToPixels(1) - 15f, 
-                                    plaPlayer.getY() + TileMapRenderer.tilesToPixels(1), 
-                                    -1f, -.2f, tmMap);
-                        }
+                    if ( gaAttack.isPressed() ) {
+                        if ( !bArrowAvailable ) {   // Check if the player can shoot again after waiting
+                            int iTimeToWait = 500;
+                            
+                            if ( plaPlayer.getShootTime().getTimeInMillis()
+                                    + iTimeToWait
+                                    < Calendar.getInstance().getTimeInMillis() ) {
+                                bArrowAvailable = true;
+                            }
+                        } 
+                        
+                        if ( bArrowAvailable ) {
+                            // Shoot Arrows
+                            smSoundManager.play(souPlayerShoot);
+
+                            bArrowAvailable = false;
+                            plaPlayer.updateShootTime();
+
+                            if (plaPlayer.getFacingRight()) { // To the right
+                                rmResourceManager.spawnArrow(
+                                        plaPlayer.getX() + TileMapRenderer.tilesToPixels(1) + 15f, 
+                                        plaPlayer.getY() + TileMapRenderer.tilesToPixels(1), 
+                                        1f, -.2f, tmMap);
+                            }
+                            else {
+                                rmResourceManager.spawnArrow( // To the left
+                                        plaPlayer.getX() - TileMapRenderer.tilesToPixels(1) - 15f, 
+                                        plaPlayer.getY() + TileMapRenderer.tilesToPixels(1), 
+                                        -1f, -.2f, tmMap);
+                            }
+                        } 
                     }
                     
                     // Checks if pause button is pressed
@@ -780,7 +796,6 @@ public class GameManager extends GameCore {
                             creCreature.getX() + creCreature.getVelocityX(),
                             creCreature.getY() + creCreature.getVelocityY()) != null) { //Eliminate arrows once they have stopped
                 creCreature.setState(Weapon.iSTATE_DYING); 
-                bArrow = false;
             }
         }
         
