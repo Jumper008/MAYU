@@ -753,16 +753,13 @@ public class GameManager extends GameCore {
         else {
             // line up with the tile boundary and detect collision with roof
             
-            boolean bCollidesTop = false;
-            
             if (fDy > 0) {
                 creCreature.setY(TileMapRenderer.tilesToPixels(pTile.y) -
                     creCreature.getHeight());
-                bCollidesTop = false;
             }
             else if (fDy < 0) {
-                creCreature.setY(TileMapRenderer.tilesToPixels(pTile.y + 1));
-                bCollidesTop = true;
+                creCreature.setY( TileMapRenderer.tilesToPixels(pTile.y + 1)
+                    + ( TileMapRenderer.tilesToPixels(2) - creCreature.getHeight() ) );
             }
             
             creCreature.collideVertical();
@@ -826,6 +823,8 @@ public class GameManager extends GameCore {
         Sprite sprCollisionSprite = getSpriteCollision(plaPlayer);
         if (sprCollisionSprite instanceof PowerUp) {
             acquirePowerUp((PowerUp)sprCollisionSprite);
+            
+            // Restart player shooting when a powerUp is acquired (goal, for instance)
             plaPlayer.updateShootTime();
             bArrowAvailable = true;
         }
