@@ -826,6 +826,8 @@ public class GameManager extends GameCore {
         Sprite sprCollisionSprite = getSpriteCollision(plaPlayer);
         if (sprCollisionSprite instanceof PowerUp) {
             acquirePowerUp((PowerUp)sprCollisionSprite);
+            plaPlayer.updateShootTime();
+            bArrowAvailable = true;
         }
         else if (sprCollisionSprite instanceof Creature) {
             Creature creBadguy = (Creature)sprCollisionSprite;
