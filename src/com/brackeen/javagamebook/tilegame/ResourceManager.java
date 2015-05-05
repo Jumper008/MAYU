@@ -38,6 +38,7 @@ public class ResourceManager {
     private Sprite sprArrowSprite;
     private Sprite sprPauseMenu;
     private Sprite sprArcherSprite;
+    private Sprite sprAguaSprite;
 
     /**
      * ResourceManager
@@ -231,7 +232,7 @@ public class ResourceManager {
 
                 // check if the char represents a sprite
                 else if (cChar == 'o') {
-                    addSprite(tmNewMap, sprCoinSprite, iX, iY);
+                    addSprite(tmNewMap, sprAguaSprite, iX, iY);
                 }
                 else if (cChar == '!') {
                     addSprite(tmNewMap, sprMusicSprite, iX, iY);
@@ -250,6 +251,9 @@ public class ResourceManager {
                 }
                 else if (cChar == '7') {
                     addSprite( tmNewMap, sprArrowSprite, iX, iY);
+                }
+                else if (cChar == '8') {
+                    addSprite( tmNewMap, sprAguaSprite, iX, iY);
                 }
             }
         }
@@ -391,7 +395,7 @@ public class ResourceManager {
             getMirrorImage(loadImage("flecha.png")),
             loadImage("flecha.png"),
             loadImage("flecha.png"),
-            loadImage("bb_ground75%.jpg")
+            loadImage("bb_ground75%.jpg"),
         };
 
         imaMatImages[1] = new Image[imaMatImages[0].length];
@@ -454,6 +458,7 @@ public class ResourceManager {
                 aniArrArrowAnim[2], aniArrArrowAnim[0], aniArrArrowAnim[0], 
                 aniArrArrowAnim[1]);
         sprPauseMenu = new Sprite(aniArrPMenu[0]);
+
     }
 
     /**
@@ -569,6 +574,13 @@ public class ResourceManager {
         aniAnim.addFrame(loadImage("heart3.png"), 150);
         aniAnim.addFrame(loadImage("heart2.png"), 150);
         sprGoalSprite = new PowerUp.Goal(aniAnim);
+        
+        aniAnim = new Animation();
+        aniAnim.addFrame(loadImage("Agua1.png"), 150);
+        aniAnim.addFrame(loadImage("Agua2.png"), 150);
+        aniAnim.addFrame(loadImage("Agua3.png"), 150);
+        aniAnim.addFrame(loadImage("Agua2.png"), 150);
+        sprAguaSprite = new PowerUp.Goal(aniAnim);
 
         // create "star" sprite
         aniAnim = new Animation();

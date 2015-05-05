@@ -54,7 +54,6 @@ public class GameManager extends GameCore {
     private Point pPointCache = new Point();
     private TileMap tmMap;
     private MidiPlayer mpMidiPlayer;
-    private MidiPlayer mpVillageMidiPlayer;
     private SoundManager smSoundManager;
     private ResourceManager rmResourceManager;
     private InputManager imInputManager;
@@ -83,7 +82,10 @@ public class GameManager extends GameCore {
     private int iScore;
     private boolean bPause;
     private boolean bArrowAvailable;
+    private boolean bMenu;
     private Sequence seqSequence1;
+    private Sequence seqSequence;
+    private Sequence seqSequence2;
     private long lTimer;
     
     // Sounds
@@ -163,14 +165,15 @@ public class GameManager extends GameCore {
 
         // start music
         mpMidiPlayer = new MidiPlayer();
-        Sequence seqSequence =
+        seqSequence =
             mpMidiPlayer.getSequence("sounds/Main_menu1.mid");
         mpMidiPlayer.play(seqSequence, true);
         
-        mpVillageMidiPlayer = new MidiPlayer();
         seqSequence1 =
-            mpVillageMidiPlayer.getSequence("sounds/Village2.mid");
+            mpMidiPlayer.getSequence("sounds/Village2.mid");
         
+        seqSequence2 =
+            mpMidiPlayer.getSequence("sounds/GameOver.mid");
         //Pause
         bPause = false;
         
@@ -179,6 +182,9 @@ public class GameManager extends GameCore {
         
         //Timer
         lTimer = 0;
+        
+        //Menu
+        bMenu = false;
     }
     
     /**
@@ -268,6 +274,18 @@ public class GameManager extends GameCore {
             stop();
         }
         
+        
+        if(iLife == 0){
+             mpMidiPlayer.play(seqSequence2, true);
+            if (gaEnter.isPressed()) {
+                        smSoundManager.play(souMenuSelect);
+                        iLife = 2;
+                        mpMidiPlayer.play(seqSequence, true);
+                        tmrRenderer.setBackground(lklBackgrounds.get
+                                (rmResourceManager.getICurrentMap()));
+                        tmMap = rmResourceManager.loadNextMap();
+                    }
+        }
         // Checks if wake up button within pause menu is pressed
         if(gaWakeUp.isPressed() && bPause) {
             smSoundManager.play(souMenuSelect);
@@ -281,7 +299,6 @@ public class GameManager extends GameCore {
         if(gaResume.isPressed() && bPause){
             bPause = false;
         }
-        
         // Checks for player input
         if (plaPlayer.isAlive()) {
             float velocityX = 0;
@@ -303,6 +320,7 @@ public class GameManager extends GameCore {
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
                         tmMap = rmResourceManager.loadNextMap();
+                       
                     }
                     break;
                 }
@@ -310,8 +328,8 @@ public class GameManager extends GameCore {
                 case 2: {
                     if (gaPlay.isPressed() && iLife != 0) {
                         smSoundManager.play(souMenuSelect);
-                        mpMidiPlayer.close();
-                        mpVillageMidiPlayer.play(seqSequence1, true);
+                       // mpMidiPlayer.close();
+                        mpMidiPlayer.play(seqSequence1, true);
                         rmResourceManager.iCurrentMap = 5;
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
@@ -663,6 +681,7 @@ public class GameManager extends GameCore {
                      (rmResourceManager.getICurrentMap()));
             tmMap = rmResourceManager.loadNextMap();
         }
+        
         
         // get keyboard/mouse input
         checkInput(lElapsedTime);
