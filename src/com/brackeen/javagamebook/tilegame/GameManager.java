@@ -12,6 +12,7 @@ import com.brackeen.javagamebook.graphics.*;
 import com.brackeen.javagamebook.sound.*;
 import com.brackeen.javagamebook.input.*;
 import com.brackeen.javagamebook.test.GameCore;
+import static com.brackeen.javagamebook.tilegame.TileMapRenderer.tilesToPixels;
 import com.brackeen.javagamebook.tilegame.sprites.*;
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -100,6 +101,8 @@ public class GameManager extends GameCore {
     private Sound souEnemyDeath;
     private Sound souBossImmune;
     
+    private LinkedList<Sprite> lklSpritesToAdd; //Holds the sprites to be added on the next frame (prevents ConcurrentModificationErrors)
+    
     /**
      * init
      * 
@@ -185,6 +188,9 @@ public class GameManager extends GameCore {
         
         //Menu
         bMenu = false;
+        
+        // Sprites to add on next frame
+        lklSpritesToAdd = new LinkedList();
     }
     
     /**
@@ -410,19 +416,39 @@ public class GameManager extends GameCore {
 
                             bArrowAvailable = false;
                             plaPlayer.updateShootTime();
-
+                            
+                            float fSpawnXPos;
+                            float fSpawnXVel = 1.5f;
+                            float fSpawnYPos = plaPlayer.getY() 
+                                    + TileMapRenderer.tilesToPixels(1);
+                            float fSpawnYVel = -.2f;
+                            
+                            Weapon weaArrowToShoot = new Weapon(
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim);
+                            
+                            weaArrowToShoot.setY(fSpawnYPos);
+                            weaArrowToShoot.setVelocityY(fSpawnYVel);
+                            
                             if (plaPlayer.getFacingRight()) { // To the right
-                                rmResourceManager.spawnArrow(
-                                        plaPlayer.getX() + TileMapRenderer.tilesToPixels(1) + 15f, 
-                                        plaPlayer.getY() + TileMapRenderer.tilesToPixels(1), 
-                                        1f, -.2f, tmMap);
+                                fSpawnXPos = plaPlayer.getX() 
+                                        + TileMapRenderer.tilesToPixels(1) + 15f;
+                                fSpawnXVel *= 1;
                             }
                             else {
-                                rmResourceManager.spawnArrow( // To the left
-                                        plaPlayer.getX() - TileMapRenderer.tilesToPixels(1) - 15f, 
-                                        plaPlayer.getY() + TileMapRenderer.tilesToPixels(1), 
-                                        -1f, -.2f, tmMap);
+                                fSpawnXPos = plaPlayer.getX() 
+                                        - TileMapRenderer.tilesToPixels(1) - 15f;
+                                fSpawnXVel *= -1;
                             }
+                            
+                            weaArrowToShoot.setX(fSpawnXPos);
+                            weaArrowToShoot.setVelocityX(fSpawnXVel);
+                            
+                            lklSpritesToAdd.add(weaArrowToShoot);
                         } 
                     }
                     
@@ -673,7 +699,7 @@ public class GameManager extends GameCore {
      * update
      * 
      * Updates Animation, position, and velocity of all Sprites 
-     * in the current map.
+     * in the current map. Add sprites to be spawned.
      * 
      * @param lElapsedTime is an object of class <code>Long</code>
      */
@@ -702,20 +728,20 @@ public class GameManager extends GameCore {
         updateCreature(CrePlayer, lElapsedTime);
         CrePlayer.update(lElapsedTime);
 
-        // update other sprites
-        Iterator iteI = tmMap.getSprites();
-        while (iteI.hasNext()) {
-            Sprite sprite = (Sprite)iteI.next();
+            // update other sprites
+            Iterator iteI = tmMap.getSprites();
+            while (iteI.hasNext()) {
+                Sprite sprite = (Sprite)iteI.next();
                 if (sprite instanceof Creature) {
                     Creature creature = (Creature)sprite;
-                    
+
                     //Show dying animation if creature has run out of health
                     if (creature.getHealth() == 0) {
                         smSoundManager.play(souEnemyDeath);
                         creature.setState(Creature.iSTATE_DYING);
                         creature.setHealth(-1);
                     }
-                    
+
                     if (creature.getState() == Creature.iSTATE_DEAD) {
                         iteI.remove();
                     }
@@ -726,6 +752,22 @@ public class GameManager extends GameCore {
                 // normal update
                 sprite.update(lElapsedTime);
             }
+        
+            // Spawn sprites
+            Iterator iteSpritesToAdd = lklSpritesToAdd.iterator();
+            
+            while ( iteSpritesToAdd.hasNext() ) {
+                Sprite sprSpawn = (Sprite) iteSpritesToAdd.next();
+
+                if ( sprSpawn instanceof Weapon ) {
+                    rmResourceManager.spawnArrow(
+                            sprSpawn.getX(), sprSpawn.getY(),
+                            sprSpawn.getVelocityX(), sprSpawn.getVelocityY(),
+                            tmMap);
+                }
+            }
+            
+            lklSpritesToAdd.clear();
         }
     }
     
@@ -752,6 +794,12 @@ public class GameManager extends GameCore {
         float fDx = creCreature.getVelocityX();
         float fOldX = creCreature.getX();
         float fNewX = fOldX + fDx * lElapsedTime;
+        
+        if ( fOldX < fNewX ) {
+            creCreature.setFacingRight(true);  
+        } else {
+            creCreature.setFacingRight(false);  
+        }
         Point pTile =
             getTileCollision(creCreature, fNewX, creCreature.getY());
         if (pTile == null) {
@@ -793,6 +841,79 @@ public class GameManager extends GameCore {
             }
             
             creCreature.collideVertical();
+        }
+        
+        // Check for attacks (NPC)
+        if (!( creCreature instanceof Player )) {
+            int iScreenWidth = smScreen.getWidth();
+            int iScreenHeight = smScreen.getHeight();
+
+            // Gets player's sprite
+            Sprite sprPlayer = tmMap.getPlayer();
+            int iMapWidth = tilesToPixels(tmMap.getWidth());
+            int iMapHeight = tilesToPixels(tmMap.getHeight());
+
+            // get the scrolling position of the map
+            // based on player's position
+            int iOffsetX = iScreenWidth / 2 -
+                Math.round(sprPlayer.getX()) - TileMapRenderer.tilesToPixels(1);
+            iOffsetX = Math.min(iOffsetX, 0);
+            iOffsetX = Math.max(iOffsetX, iScreenWidth - iMapWidth);
+            
+            int iOffsetY = iScreenHeight / 2 -
+            Math.round(sprPlayer.getY()) - TileMapRenderer.tilesToPixels(1);
+            iOffsetY = Math.min(iOffsetY, 0);
+            iOffsetY = Math.max(iOffsetY, iScreenHeight - iMapHeight);
+            
+            int iX = Math.round(creCreature.getX()) + iOffsetX;
+            int iY = Math.round(creCreature.getY()) + iOffsetY;
+            
+            if (creCreature instanceof Archer && 
+                    iX >= 0 && iX < iScreenWidth) {
+                
+                int iTimeBetweenShots = 2000;
+                    
+                if ( creCreature.getShootTime().getTimeInMillis()
+                        + iTimeBetweenShots
+                        < Calendar.getInstance().getTimeInMillis() ) {
+                    
+                    smSoundManager.play(souPlayerShoot);
+                    creCreature.updateShootTime();
+                    
+                    float fSpawnXPos;
+                            float fSpawnXVel = 1.5f;
+                            float fSpawnYPos = creCreature.getY() 
+                                    + TileMapRenderer.tilesToPixels(1);
+                            float fSpawnYVel = -.2f;
+                            
+                            Weapon weaArrowToShoot = new Weapon(
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim,
+                                        rmResourceManager.aniDefaultAnim);
+                            
+                            weaArrowToShoot.setY(fSpawnYPos);
+                            weaArrowToShoot.setVelocityY(fSpawnYVel);
+                            
+                            if (creCreature.getFacingRight()) { // To the right
+                                fSpawnXPos = creCreature.getX() 
+                                        + TileMapRenderer.tilesToPixels(1) + 15f;
+                                fSpawnXVel *= 1;
+                            }
+                            else {
+                                fSpawnXPos = creCreature.getX() 
+                                        - TileMapRenderer.tilesToPixels(1) - 15f;
+                                fSpawnXVel *= -1;
+                            }
+                            
+                            weaArrowToShoot.setX(fSpawnXPos);
+                            weaArrowToShoot.setVelocityX(fSpawnXVel);
+                            
+                            lklSpritesToAdd.add(weaArrowToShoot);
+                }
+            }
         }
         
         //Check for collisions
@@ -940,6 +1061,7 @@ public class GameManager extends GameCore {
                 default: {
                     break;
                 }
+                
             }
             tmMap = rmResourceManager.loadNextMap();
         }

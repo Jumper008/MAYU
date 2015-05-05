@@ -17,7 +17,6 @@ public class Player extends Creature {
     private static final float fJUMP_SPEED = -.4f;
 
     private boolean bOnGround;
-    private boolean bFacingRight;   // States wether or not the player is facing right.
     private float fInitialJumpY = 0;    // Records from where did the character start to jump
     private float fJumpAccelHeight = 200; // States how far can the player jump from its initial position in Y
     private boolean bJumpAccelHeightReached = false;
@@ -40,7 +39,6 @@ public class Player extends Creature {
     {
         super(aniWalkLeft, aniWalkRight, aniDeadLeft, aniDeadRight,
                 aniIdleLeft, aniIdleRight);
-        bFacingRight = true;
     }
     
     /**
@@ -62,7 +60,6 @@ public class Player extends Creature {
     {
         super(aniWalkLeft, aniWalkRight, aniDeadLeft, aniDeadRight,
                 aniIdleLeft, aniIdleRight, iHealth);
-        bFacingRight = true;
     }
 
     /**
@@ -184,29 +181,5 @@ public class Player extends Creature {
      */
     public float getMaxSpeed() {
         return 0.5f;
-    }
-    
-    /**
-     * setFacingRight
-     * 
-     * Activates or deactivates the way the player is facing.
-     * 
-     * @param bRight is an object of class <code>boolean</code> that states 
-     * wether the player is, or not, facing right.
-     * 
-     */
-    public void setFacingRight( boolean bRight ) {
-        bFacingRight = bRight;
-    }
-    
-    /**
-     * getFacingRight
-     * 
-     * Returns wether the player is, or not, facing right.
-     * 
-     * @return object of class <code>boolean</code>
-     */
-    public boolean getFacingRight() {
-        return bFacingRight;
     }
 }

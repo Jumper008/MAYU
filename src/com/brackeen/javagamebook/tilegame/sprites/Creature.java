@@ -36,6 +36,7 @@ public abstract class Creature extends Sprite {
     private long lStateTime;
     private int iHealth;
     private Calendar calShootTime;
+    private boolean bFacingRight;   // States wether or not the creature is facing to the right.
 
     /**
      * Creature
@@ -43,7 +44,8 @@ public abstract class Creature extends Sprite {
      * Parameterized Constructor
      * 
      * Creates a new Creature with the specified Animations. With iHealth set 
-     * as 2 and ShootTime with the time of its creation.
+     * as 2, ShootTime with the time of its creation, and bFacingRight set
+     * as true.
      * 
      * @param aniWalkLeft is an object of class <code>Animation</code>
      * @param aniWalkRight is an object of class <code>Animation</code>
@@ -66,6 +68,7 @@ public abstract class Creature extends Sprite {
         iState = iSTATE_NORMAL;
         iHealth = 2;
         calShootTime = Calendar.getInstance();
+        bFacingRight = true;
     }
     
     /**
@@ -74,7 +77,8 @@ public abstract class Creature extends Sprite {
      * Parameterized Constructor 2
      * 
      * Creates a new Creature with the specified Animations and Health and 
-     * ShootTime as the time of its creation.
+     * ShootTime as the time of its creation. bFacingRight is set
+     * as true
      * 
      * @param aniWalkLeft is an object of class <code>Animation</code>
      * @param aniWalkRight is an object of class <code>Animation</code>
@@ -98,6 +102,7 @@ public abstract class Creature extends Sprite {
         iState = iSTATE_NORMAL;
         this.iHealth = iHealth;
         calShootTime = Calendar.getInstance();
+        bFacingRight = true;
     }
     
     /**
@@ -313,6 +318,30 @@ public abstract class Creature extends Sprite {
      */
     public void updateShootTime() {
         calShootTime = Calendar.getInstance();
+    }
+    
+    /**
+     * setFacingRight
+     * 
+     * Activates or deactivates the way the player is facing.
+     * 
+     * @param bRight is an object of class <code>boolean</code> that states 
+     * wether the player is, or not, facing right.
+     * 
+     */
+    public void setFacingRight( boolean bRight ) {
+        bFacingRight = bRight;
+    }
+    
+    /**
+     * getFacingRight
+     * 
+     * Returns wether the player is, or not, facing right.
+     * 
+     * @return object of class <code>boolean</code>
+     */
+    public boolean getFacingRight() {
+        return bFacingRight;
     }
 
 }

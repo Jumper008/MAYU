@@ -39,6 +39,8 @@ public class ResourceManager {
     private Sprite sprPauseMenu;
     private Sprite sprArcherSprite;
     private Sprite sprAguaSprite;
+    
+    public Animation aniDefaultAnim; //Animation meant to be used by other classes when there is no animation available
 
     /**
      * ResourceManager
@@ -54,6 +56,7 @@ public class ResourceManager {
         loadTileImages();
         loadCreatureSprites();
         loadPowerUpSprites();
+        aniDefaultAnim = null;
     }
     
     /**
@@ -360,6 +363,10 @@ public class ResourceManager {
      * loads the sprites of the creatures used in the map
      */
     public void loadCreatureSprites() {
+        
+        // Loads the default animation in case no animation of a creature is used
+        aniDefaultAnim = new Animation();
+        aniDefaultAnim.addFrame(loadImage("PC_1.png"), 1000);
 
         Image[][] imaMatImages = new Image[4][];
         
