@@ -43,7 +43,7 @@ public abstract class Creature extends Sprite {
      * Parameterized Constructor
      * 
      * Creates a new Creature with the specified Animations. With iHealth set 
-     * as 2.
+     * as 2 and ShootTime with the time of its creation.
      * 
      * @param aniWalkLeft is an object of class <code>Animation</code>
      * @param aniWalkRight is an object of class <code>Animation</code>
@@ -65,6 +65,7 @@ public abstract class Creature extends Sprite {
         this.aniIdleRight = aniIdleRight;
         iState = iSTATE_NORMAL;
         iHealth = 2;
+        calShootTime = Calendar.getInstance();
     }
     
     /**
@@ -72,7 +73,8 @@ public abstract class Creature extends Sprite {
      * 
      * Parameterized Constructor 2
      * 
-     * Creates a new Creature with the specified Animations and Health.
+     * Creates a new Creature with the specified Animations and Health and 
+     * ShootTime as the time of its creation.
      * 
      * @param aniWalkLeft is an object of class <code>Animation</code>
      * @param aniWalkRight is an object of class <code>Animation</code>
@@ -95,6 +97,7 @@ public abstract class Creature extends Sprite {
         this.aniIdleRight = aniIdleRight;
         iState = iSTATE_NORMAL;
         this.iHealth = iHealth;
+        calShootTime = Calendar.getInstance();
     }
     
     /**
@@ -182,10 +185,7 @@ public abstract class Creature extends Sprite {
     /**
      * setHealth
      * 
-     * Sets the amount of health for the creature.
-     * 
-     * If health reaches 0, and the method isAlive is called, the State of the
-     * creature will be changed to iSTATE_DYING
+     * Sets the amount of health for the creature
      * 
      * @param iHealth 
      */

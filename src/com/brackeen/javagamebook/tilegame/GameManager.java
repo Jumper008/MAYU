@@ -289,6 +289,7 @@ public class GameManager extends GameCore {
         // Checks if wake up button within pause menu is pressed
         if(gaWakeUp.isPressed() && bPause) {
             smSoundManager.play(souMenuSelect);
+            iLife = 2;
             bPause = false;
             rmResourceManager.iCurrentMap = 2;
             tmrRenderer.setBackground(lklBackgrounds.get
@@ -444,7 +445,17 @@ public class GameManager extends GameCore {
                 break;
             }
         }
-
+            else {
+            // Checks if enter has been pressed within gameover menu
+            ///if( rmResourceManager.iCurrentMap == 9 ) {
+            if ( gaEnter.isPressed() ) {    
+                System.out.println( "HELLO" );
+                rmResourceManager.iCurrentMap = 1;
+                tmrRenderer.setBackground(
+                        lklBackgrounds.get(rmResourceManager.getICurrentMap()));
+                tmMap = rmResourceManager.loadNextMap();
+            }
+        }
     }
 
     /**
@@ -675,7 +686,7 @@ public class GameManager extends GameCore {
              return;   
         }
         
-        if(iLife == 0){
+        if(iLife == 0){     // Send to game over screen
             rmResourceManager.iCurrentMap = 9;
             tmrRenderer.setBackground(lklBackgrounds.get
                      (rmResourceManager.getICurrentMap()));
@@ -819,7 +830,18 @@ public class GameManager extends GameCore {
             boolean bCanKill = (fOldY < creCreature.getY());
             checkPlayerCollision((Player)creCreature, bCanKill);
         }
-
+        
+        // Check if creature fell to its demise
+        if (creCreature.getY() > TileMapRenderer.tilesToPixels( tmMap.getHeight()) 
+                && creCreature.getState() == Creature.iSTATE_NORMAL) {
+            
+            creCreature.setState(Creature.iSTATE_DYING);
+            creCreature.setHealth(0);
+            
+            if ( creCreature instanceof Player ) {
+                iLife -= 1;
+            }
+        }
     }
     
     /**
