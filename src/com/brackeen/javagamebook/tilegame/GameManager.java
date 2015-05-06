@@ -91,6 +91,7 @@ public class GameManager extends GameCore {
     private Sequence seqSequence3;
     private Sequence seqSequence4;
     private long lTimer;
+    private boolean bPauseBoss;
     
     // Sounds
     private Sound souPrizeSound;
@@ -147,7 +148,7 @@ public class GameManager extends GameCore {
         lklBackgrounds.add(rmResourceManager.loadImage("first.jpg"));
             //GameOver map
         lklBackgrounds.add(rmResourceManager.loadImage("Game Over1.jpg"));
-        
+        lklBackgrounds.add(rmResourceManager.loadImage("Background.png"));
         
         tmrRenderer.setBackground(lklBackgrounds.get(0));
         
@@ -199,6 +200,7 @@ public class GameManager extends GameCore {
         
         //Menu
         bMenu = false;
+        bPauseBoss = false;
         
         // Sprites to add on next frame
         lklSpritesToAdd = new LinkedList();
@@ -292,9 +294,10 @@ public class GameManager extends GameCore {
         }
         
         
-        if(iLife == 0){
+        if(iLife == 0 || bPauseBoss){
              mpMidiPlayer.play(seqSequence3, true);
             if (gaEnter.isPressed()) {
+                        bPauseBoss = false;
                         smSoundManager.play(souMenuSelect);
                         iLife = iInitialLife;
                         mpMidiPlayer.play(seqSequence, true);
@@ -855,6 +858,14 @@ public class GameManager extends GameCore {
                 fGRAVITY * lElapsedTime);
         }
 
+        if(creCreature instanceof Boss && !creCreature.isAlive()){     // Send to game over screen
+            bPauseBoss = true;
+            rmResourceManager.iCurrentMap = 10;
+            tmrRenderer.setBackground(lklBackgrounds.get
+                     (rmResourceManager.getICurrentMap()));
+            tmMap = rmResourceManager.loadNextMap();
+        }
+        
         // change x
         float fDx = creCreature.getVelocityX();
         float fOldX = creCreature.getX();
