@@ -537,13 +537,14 @@ public class GameManager extends GameCore {
         
          //Update life and score
         if(rmResourceManager.iCurrentMap > 5){
+         gra2D_G.draw3DRect(0, 0, 170, 80, true);
+         gra2D_G.setColor(Color.decode("#A3A375"));
+         gra2D_G.fill3DRect(0, 0, 170, 80, true);
+         gra2D_G.setColor(Color.black);
          gra2D_G.drawString("Score: " + iScore, 10, 20);
          gra2D_G.drawString("Life: " + iLife, 10, 45);
          Player plaPlayer = (Player) tmMap.getPlayer();
          gra2D_G.drawString("Health: " + plaPlayer.getHealth(), 10, 75);
-                    
-                        gra2D_G.drawString("PlayerX: " + plaPlayer.getX(), 10, 105);
-                        gra2D_G.drawString("PlayerY: " + plaPlayer.getY(), 10, 125);
                     
         }
     }
