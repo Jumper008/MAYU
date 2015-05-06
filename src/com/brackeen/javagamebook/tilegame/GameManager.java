@@ -186,6 +186,7 @@ public class GameManager extends GameCore {
         
         seqSequence4 =
             mpMidiPlayer.getSequence("sounds/BOSS.mid");
+        
         //Pause
         bPause = false;
         
@@ -782,6 +783,13 @@ public class GameManager extends GameCore {
                             sprSpawn.getVelocityX(), sprSpawn.getVelocityY(),
                             tmMap);
                 }
+                
+                if (sprSpawn instanceof Fly ) {
+                    rmResourceManager.spawnBat(
+                            sprSpawn.getX(), sprSpawn.getY(),
+                            sprSpawn.getVelocityX(), sprSpawn.getVelocityY(),
+                            tmMap);
+                }
             }
             
             lklSpritesToAdd.clear();
@@ -887,6 +895,108 @@ public class GameManager extends GameCore {
             int iX = Math.round(creCreature.getX()) + iOffsetX;
             int iY = Math.round(creCreature.getY()) + iOffsetY;
             
+            // Spawning of Bats
+            if (creCreature instanceof Boss && creCreature.getVelocityX() != 0
+                    && creCreature.isAlive()) {
+                int iTimeBetweenAttacks = 2000;
+                
+                if ( creCreature.getShootTime().getTimeInMillis()
+                        + iTimeBetweenAttacks
+                        < Calendar.getInstance().getTimeInMillis()
+                        && creCreature.isAlive() ) {
+                    
+                    creCreature.updateShootTime();
+                    
+                    int iAttackType = (int) (Math.random() * 2) + 0;
+                    
+                    switch (iAttackType) {
+                        case 0: {
+                            smSoundManager.play(souPlayerShoot);
+                            for (int i = 0; i < 5; i ++) {
+                                
+                                // Genero un número al azar de -50 a la altura del jefe
+                                int iAzarY = (int) (Math.random() * creCreature.getHeight()) - 50;
+                                // Genero un número al azar de -50 a la anchura del jefe
+                                int iAzarX = (int) (Math.random() * creCreature.getWidth()) - 50;
+
+                                float fSpawnXPos;
+                                float fSpawnXVel = .5f;
+                                float fSpawnYPos = creCreature.getY() 
+                                        + iAzarY;
+                                float fSpawnYVel = 0f;
+
+                                Fly flBat = new Fly(
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim);
+
+                                flBat.setY(fSpawnYPos);
+                                flBat.setVelocityY(fSpawnYVel);
+
+                                if (creCreature.getFacingRight()) { // To the right
+                                    fSpawnXPos = creCreature.getX() 
+                                            + iAzarX;
+                                    fSpawnXVel *= 1;
+                                }
+                                else {
+                                    fSpawnXPos = creCreature.getX() // To the left
+                                            - iAzarX;
+                                    fSpawnXVel *= -1;
+                                }
+
+                                flBat.setX(fSpawnXPos);
+                                flBat.setVelocityX(fSpawnXVel);
+
+                                lklSpritesToAdd.add(flBat);
+                            }
+                            break;
+                        }
+                        case 1: {
+                            smSoundManager.play(souPlayerShoot);
+                            for (int i = 0; i < 20; i ++) {
+                                
+                                // 
+                                int iAzarY = (int) (Math.random() * creCreature.getHeight()) 
+                                        - 50;
+                                // 
+                                int iAzarX = (int) (Math.random() * 
+                                        TileMapRenderer.tilesToPixels(tmMap.getWidth())) 
+                                        + TileMapRenderer.tilesToPixels(0);
+
+                                float fSpawnXPos = iAzarX;
+                                float fSpawnXVel = 0f;
+                                float fSpawnYPos = 0;
+                                float fSpawnYVel = -.2f;
+
+                                Weapon weaArrowToShoot = new Weapon(
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim,
+                                            rmResourceManager.aniDefaultAnim);
+
+                                weaArrowToShoot.setY(fSpawnYPos);
+                                weaArrowToShoot.setVelocityY(fSpawnYVel);
+
+                                weaArrowToShoot.setX(fSpawnXPos);
+                                weaArrowToShoot.setVelocityX(fSpawnXVel);
+
+                                lklSpritesToAdd.add(weaArrowToShoot);
+                            }
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // Archers shooting arrows
             if (creCreature instanceof Archer && 
                     iX >= 0 && iX < iScreenWidth) {
                 

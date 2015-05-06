@@ -640,6 +640,7 @@ public class ResourceManager {
      * @param fPosY is an object of class <code>float</code> that represents the position of the arrow in the Y axis
      * @param fVelX is an object of class <code>float</code> that represents the velocity of the arrow in the X axis
      * @param fVelY is an object of class <code>float</code> that represents the velocity of the arrow in the Y axis
+     * @param tmMap is an object of class <code>TileMap</code> that represents the map on which the object is spawned
      */
     public void spawnArrow(float fPosX, float fPosY, float fVelX, float fVelY, TileMap tmMap) {
         Weapon weaSpawnSprite;
@@ -652,28 +653,52 @@ public class ResourceManager {
         
         tmMap.addSprite(weaSpawnSprite);
     }
+    
     /**
-     * spawnArrow
+     * spawnBat
      * 
-     * Spawns a menu in a Map with a specific position.
+     * Spawns a bat in a Map with a specific position and velocity.
      * 
      * @param fPosX is an object of class <code>float</code> that represents the position of the arrow in the X axis
      * @param fPosY is an object of class <code>float</code> that represents the position of the arrow in the Y axis
+     * @param fVelX is an object of class <code>float</code> that represents the velocity of the arrow in the X axis
+     * @param fVelY is an object of class <code>float</code> that represents the velocity of the arrow in the Y axis
+     * @param tmMap is an object of class <code>TileMap</code> that represents the map on which the object is spawned
      */
-      public void spawnMenu(float fPosX, float fPosY, TileMap tmMap, boolean bPausaMenu) {
+    public void spawnBat(float fPosX, float fPosY, float fVelX, float fVelY, TileMap tmMap) {
+        Fly flSpawnSprite;
+        flSpawnSprite = (Fly)sprFlySprite.clone();
         
-        if(!bPausaMenu) {
+        flSpawnSprite.setX(fPosX);
+        flSpawnSprite.setY(fPosY);
+        flSpawnSprite.setVelocityX(fVelX);
+        flSpawnSprite.setVelocityY(fVelY);
         
-        sprPauseMenu.setX(fPosX);
-        sprPauseMenu.setY(fPosY);
-       
-        
-        tmMap.addSprite(sprPauseMenu);
-         
-        }
-        else{
-            tmMap.removeSprite(sprPauseMenu);
-        }
+        tmMap.addSprite(flSpawnSprite);
     }
+    
+//    /**
+//     * spawnArrow
+//     * 
+//     * Spawns a menu in a Map with a specific position.
+//     * 
+//     * @param fPosX is an object of class <code>float</code> that represents the position of the arrow in the X axis
+//     * @param fPosY is an object of class <code>float</code> that represents the position of the arrow in the Y axis
+//     */
+//      public void spawnMenu(float fPosX, float fPosY, TileMap tmMap, boolean bPausaMenu) {
+//        
+//        if(!bPausaMenu) {
+//        
+//        sprPauseMenu.setX(fPosX);
+//        sprPauseMenu.setY(fPosY);
+//       
+//        
+//        tmMap.addSprite(sprPauseMenu);
+//         
+//        }
+//        else{
+//            tmMap.removeSprite(sprPauseMenu);
+//        }
+//    }
 
 }
