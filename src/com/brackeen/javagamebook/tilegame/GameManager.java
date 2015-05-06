@@ -165,6 +165,7 @@ public class GameManager extends GameCore {
         souMenuSelect = smSoundManager.getSound("sounds/menu_select.wav");
         souArrowHit = smSoundManager.getSound("sounds/arrow_hit2.wav");
         souBossImmune = smSoundManager.getSound("sounds/boss_invinsible.wav");
+        souPlayerHurt = smSoundManager.getSound("sounds/player_hurt.wav");
 
         // start music
         mpMidiPlayer = new MidiPlayer();
@@ -535,6 +536,10 @@ public class GameManager extends GameCore {
          gra2D_G.drawString("Life: " + iLife, 10, 45);
          Player plaPlayer = (Player) tmMap.getPlayer();
          gra2D_G.drawString("Health: " + plaPlayer.getHealth(), 10, 75);
+                    
+                        gra2D_G.drawString("PlayerX: " + plaPlayer.getX(), 10, 105);
+                        gra2D_G.drawString("PlayerY: " + plaPlayer.getY(), 10, 125);
+                    
         }
     }
     
@@ -795,10 +800,12 @@ public class GameManager extends GameCore {
         float fOldX = creCreature.getX();
         float fNewX = fOldX + fDx * lElapsedTime;
         
-        if ( fOldX < fNewX ) {
-            creCreature.setFacingRight(true);  
-        } else {
-            creCreature.setFacingRight(false);  
+        if( !(creCreature instanceof Player)  ) {   // Update direction that the npc's are facing (the player updates through player input)
+            if ( fOldX < fNewX) {
+                creCreature.setFacingRight(true);  
+            } else {
+                creCreature.setFacingRight(false);  
+            }
         }
         Point pTile =
             getTileCollision(creCreature, fNewX, creCreature.getY());
@@ -925,8 +932,10 @@ public class GameManager extends GameCore {
             if ( sprCollision != null ) {
                 if (sprCollision instanceof Creature) {
                     smSoundManager.play(souArrowHit);
+                    
                     Creature creAux = (Creature)sprCollision;
                     creAux.setHealth(creAux.getHealth() - 1);
+                    
                     creCreature.setVelocityX(0f);
                 }
                 else {
@@ -1003,10 +1012,20 @@ public class GameManager extends GameCore {
             else {
                 // player gets hurt!
                 if(iLife > 1){
-                    plaPlayer.setHealth(plaPlayer.getHealth() - 1);
+                    if (creBadguy instanceof Weapon) { // Handle damage by weapons
+                        plaPlayer.setHealth(plaPlayer.getHealth() - 100);
+                        smSoundManager.play(souArrowHit);
+                        smSoundManager.play(souPlayerHurt);
+                        
+                        creBadguy.setState(Creature.iSTATE_DYING);
+                    }
+                    else {  // Handle damage by close contact
+                        plaPlayer.setHealth(plaPlayer.getHealth() - 1);
+                    }
+                    
                     if (plaPlayer.getHealth() < 1) {
-                        plaPlayer.setState(Creature.iSTATE_DYING);
-                        iLife -= 1;
+                            plaPlayer.setState(Creature.iSTATE_DYING);
+                            iLife -= 1;
                     }
                 }
                 else{
