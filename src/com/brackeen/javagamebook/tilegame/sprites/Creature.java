@@ -37,7 +37,11 @@ public abstract class Creature extends Sprite {
     private int iHealth;
     private Calendar calShootTime;
     private boolean bFacingRight;   // States wether or not the creature is facing to the right.
-
+    
+    private Sprite sprStickySprite; // Variables used to make the creature stick to another creature
+    private float fStickOffsetX;
+    private float fStickOffsetY;
+    
     /**
      * Creature
      * 
@@ -69,6 +73,7 @@ public abstract class Creature extends Sprite {
         iHealth = 2;
         calShootTime = Calendar.getInstance();
         bFacingRight = true;
+        sprStickySprite = null;
     }
     
     /**
@@ -103,6 +108,7 @@ public abstract class Creature extends Sprite {
         this.iHealth = iHealth;
         calShootTime = Calendar.getInstance();
         bFacingRight = true;
+        sprStickySprite = null;
     }
     
     /**
@@ -344,4 +350,66 @@ public abstract class Creature extends Sprite {
         return bFacingRight;
     }
 
+    /**
+     * setSticky
+     * 
+     * Makes the creature sticky. This implies that it will store a reference to
+     * the sprite it receives. This, used alongside with getStickyX and 
+     * getStickyY, can be used to obtain relative positions to where this
+     * creature should be positioned in order make it look like its stuck to
+     * sprStickySprite.
+     * 
+     * @param sprStickySprite is an object of class <code>Sprite</code>
+     */
+    public void setSticky( Sprite sprStickySprite ) {
+        this.sprStickySprite = sprStickySprite;
+        
+        this.fStickOffsetX = sprStickySprite.getX() - this.getX();
+        this.fStickOffsetY = sprStickySprite.getY() - this.getY();
+    }
+    
+    /**
+     * isSticky
+     * 
+     * States whether the creature is currently "stuck" to another creature.
+     * 
+     * @return <code>true</code> if sprStickySprite != null
+     */
+    public boolean isSticky() {
+        return sprStickySprite != null;
+    }
+    
+    /**
+     * getStickyX
+     * 
+     * States the position in X where this creature should be placed in order for
+     * it to look to be stuck to sprStickySprite
+     * 
+     * @return object of class <code>float</code>
+     */
+    public float getStickyX() {
+        if ( this.isSticky() ) {
+            return sprStickySprite.getX() - fStickOffsetX;
+        }
+        else {
+            return this.getX();
+        }
+    }
+    
+    /**
+     * getStickyY
+     * 
+     * States the position in Y where this creature should be placed in order for
+     * it to look to be stuck to sprStickySprite
+     * 
+     * @return object of class <code>float</code>
+     */
+    public float getStickyY() {
+        if ( this.isSticky() ) {
+            return sprStickySprite.getY() - fStickOffsetY;
+        }
+        else {
+            return this.getY();
+        }
+    }
 }

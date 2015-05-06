@@ -888,11 +888,12 @@ public class GameManager extends GameCore {
             if (creCreature instanceof Archer && 
                     iX >= 0 && iX < iScreenWidth) {
                 
-                int iTimeBetweenShots = 2000;
+                int iTimeBetweenShots = 2500;
                     
                 if ( creCreature.getShootTime().getTimeInMillis()
                         + iTimeBetweenShots
-                        < Calendar.getInstance().getTimeInMillis() ) {
+                        < Calendar.getInstance().getTimeInMillis() 
+                        && creCreature.isAlive() ) {
                     
                     smSoundManager.play(souPlayerShoot);
                     creCreature.updateShootTime();
@@ -943,6 +944,8 @@ public class GameManager extends GameCore {
                 if (sprCollision instanceof Creature) {
                     smSoundManager.play(souArrowHit);
                     
+                    creCreature.setSticky(sprCollision);
+                    
                     Creature creAux = (Creature)sprCollision;
                     creAux.setHealth(creAux.getHealth() - 1);
                     
@@ -963,6 +966,11 @@ public class GameManager extends GameCore {
                             creCreature.getX() + creCreature.getVelocityX(),
                             creCreature.getY() + creCreature.getVelocityY()) != null) { //Eliminate arrows once they have stopped
                 creCreature.setState(Weapon.iSTATE_DYING); 
+            }
+            
+            if (creCreature.isSticky()) {
+                creCreature.setX( creCreature.getStickyX() );
+                creCreature.setY( creCreature.getStickyY() );
             }
         }
         
@@ -1027,6 +1035,7 @@ public class GameManager extends GameCore {
                         smSoundManager.play(souArrowHit);
                         smSoundManager.play(souPlayerHurt);
                         
+                        creBadguy.setSticky( plaPlayer );   //Make the arrow follow the player after it hits
                         creBadguy.setState(Creature.iSTATE_DYING);
                     }
                     else {  // Handle damage by close contact
