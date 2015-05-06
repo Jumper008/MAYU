@@ -88,6 +88,7 @@ public class GameManager extends GameCore {
     private Sequence seqSequence;
     private Sequence seqSequence2;
     private Sequence seqSequence3;
+    private Sequence seqSequence4;
     private long lTimer;
     
     // Sounds
@@ -181,6 +182,9 @@ public class GameManager extends GameCore {
             mpMidiPlayer.getSequence("sounds/Castle.mid");
         
         seqSequence3 =
+            mpMidiPlayer.getSequence("sounds/Clouds.mid");
+        
+        seqSequence4 =
             mpMidiPlayer.getSequence("sounds/BOSS.mid");
         //Pause
         bPause = false;
@@ -1091,6 +1095,7 @@ public class GameManager extends GameCore {
                 }
                 case 7:{
                    tmrRenderer.setBackground(lklBackgrounds.get(7));
+                   mpMidiPlayer.play(seqSequence3, true);
                     break;
                 }
                 case 8:{
