@@ -140,7 +140,7 @@ public class GameManager extends GameCore {
             // Second map
         lklBackgrounds.add(rmResourceManager.loadImage("Fondo_Castillo.jpg"));
             // Third map
-        lklBackgrounds.add(rmResourceManager.loadImage("background.png"));
+        lklBackgrounds.add(rmResourceManager.loadImage("final.jpg"));
             // Fourth map
         lklBackgrounds.add(rmResourceManager.loadImage("first.jpg"));
             //GameOver map
