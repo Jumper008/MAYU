@@ -40,6 +40,7 @@ public class ResourceManager {
     private Sprite sprArcherSprite;
     private Sprite sprAguaSprite;
     private Sprite sprPicosSprite;
+    private Sprite sprBossSprite;
     
     public Animation aniDefaultAnim; //Animation meant to be used by other classes when there is no animation available
 
@@ -262,6 +263,9 @@ public class ResourceManager {
                 else if (cChar == '9') {
                     addSprite( tmNewMap, sprPicosSprite, iX, iY);
                 }
+                else if (cChar == '0') {
+                    addSprite( tmNewMap, sprBossSprite, iX, iY);
+                }
             }
         }
 
@@ -406,7 +410,12 @@ public class ResourceManager {
             getMirrorImage(loadImage("flecha.png")),
             loadImage("flecha.png"),
             loadImage("flecha.png"),
-            loadImage("bb_ground75%.jpg"),
+            loadImage("rey_caminando_1.png"),
+            loadImage("rey_caminando_2.png"),
+            loadImage("rey_caminando_3.png"),
+            loadImage("rey_caminando_4.png"),
+            loadImage("rey_caminando_5.png"),
+            loadImage("rey_caminando_6.png"),
         };
 
         imaMatImages[1] = new Image[imaMatImages[0].length];
@@ -427,8 +436,8 @@ public class ResourceManager {
         Animation[] aniArrFlyAnim = new Animation[4];
         Animation[] aniArrGrubAnim = new Animation[4];
         Animation[] aniArrArrowAnim = new Animation[4];
-        Animation[] aniArrPMenu = new Animation[4];
         Animation[] aniArrArcherAnim = new Animation[4];
+        Animation[] aniArrBossAnim = new Animation[4];
         
        for (int iI=0; iI<4; iI++) {
             aniArrPlayerCaminAnim[iI] = createPlayerAnim(imaMatImages[iI][0], 
@@ -449,7 +458,10 @@ public class ResourceManager {
                     imaMatImages[iI][24]);
             aniArrArrowAnim[iI] = createWeaponAnim(imaMatImages[iI][25], 
                     imaMatImages[iI][25], imaMatImages[iI][25]);
-            aniArrPMenu[iI] = createMenuAnim(imaMatImages[iI][28]);
+            aniArrBossAnim[iI] = createGrubAnim(imaMatImages[iI][29], 
+                    imaMatImages[iI][30],imaMatImages[iI][31],
+                    imaMatImages[iI][32],imaMatImages[iI][33],
+                    imaMatImages[iI][34]);
         }
 
         // create creature sprites
@@ -468,7 +480,9 @@ public class ResourceManager {
         sprArrowSprite = new Weapon(aniArrArrowAnim[0], aniArrArrowAnim[1], 
                 aniArrArrowAnim[2], aniArrArrowAnim[0], aniArrArrowAnim[0], 
                 aniArrArrowAnim[1]);
-        sprPauseMenu = new Sprite(aniArrPMenu[0]);
+        sprBossSprite = new Boss(aniArrBossAnim[0], aniArrBossAnim[1],
+                aniArrBossAnim[2], aniArrBossAnim[3], aniArrBossAnim[0], 
+                aniArrBossAnim[1]);
 
     }
 
@@ -602,10 +616,10 @@ public class ResourceManager {
         sprCoinSprite = new PowerUp.Star(aniAnim);
         
         aniAnim = new Animation();
-        aniAnim.addFrame(loadImage("Picos.png"), 100);
-        aniAnim.addFrame(loadImage("Picos.png"), 100);
-        aniAnim.addFrame(loadImage("Picos.png"), 100);
-        aniAnim.addFrame(loadImage("Picos.png"), 100);
+        aniAnim.addFrame(loadImage("Picos_2.png"), 100);
+        aniAnim.addFrame(loadImage("Picos_2.png"), 100);
+        aniAnim.addFrame(loadImage("Picos_2.png"), 100);
+        aniAnim.addFrame(loadImage("Picos_2.png"), 100);
         sprPicosSprite = new PowerUp.Star(aniAnim);
 
         // create "music" sprite
