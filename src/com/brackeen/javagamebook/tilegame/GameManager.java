@@ -87,6 +87,7 @@ public class GameManager extends GameCore {
     private Sequence seqSequence1;
     private Sequence seqSequence;
     private Sequence seqSequence2;
+    private Sequence seqSequence3;
     private long lTimer;
     
     // Sounds
@@ -177,6 +178,9 @@ public class GameManager extends GameCore {
             mpMidiPlayer.getSequence("sounds/Village2.mid");
         
         seqSequence2 =
+            mpMidiPlayer.getSequence("sounds/Castle.mid");
+        
+        seqSequence3 =
             mpMidiPlayer.getSequence("sounds/GameOver.mid");
         //Pause
         bPause = false;
@@ -283,7 +287,7 @@ public class GameManager extends GameCore {
         
         
         if(iLife == 0){
-             mpMidiPlayer.play(seqSequence2, true);
+             mpMidiPlayer.play(seqSequence3, true);
             if (gaEnter.isPressed()) {
                         smSoundManager.play(souMenuSelect);
                         iLife = 2;
@@ -296,6 +300,7 @@ public class GameManager extends GameCore {
         // Checks if wake up button within pause menu is pressed
         if(gaWakeUp.isPressed() && bPause) {
             smSoundManager.play(souMenuSelect);
+            mpMidiPlayer.play(seqSequence, true);
             iLife = 2;
             bPause = false;
             rmResourceManager.iCurrentMap = 2;
@@ -1064,6 +1069,7 @@ public class GameManager extends GameCore {
             // Advance to next map and change background according to map
             smSoundManager.play(souPrizeSound,
                 new EchoFilter(2000, .7f), false);
+                mpMidiPlayer.play(seqSequence2, true);
             switch(rmResourceManager.getICurrentMap()) {
                 case 4: { // Map 5
                     tmrRenderer.setBackground(lklBackgrounds.get(4));
