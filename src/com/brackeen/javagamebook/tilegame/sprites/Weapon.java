@@ -13,6 +13,7 @@ import com.brackeen.javagamebook.graphics.Animation;
  */
 public class Weapon extends Creature {
     private static final float fTHROW_SPEED = .95f;
+    private boolean bDownwardArrow;
     
     /**
      * Weapon
@@ -32,6 +33,7 @@ public class Weapon extends Creature {
     {
         super(aniWalkLeft, aniWalkRight, aniDeadLeft, aniDeadRight, 
                 aniIdleLeft, aniIdleRight);
+        bDownwardArrow = false;
     }
     
     /**
@@ -53,6 +55,7 @@ public class Weapon extends Creature {
     {
         super(aniWalkLeft, aniWalkRight, aniDeadLeft, aniDeadRight, 
                 aniIdleLeft, aniIdleRight, iHealth);
+        bDownwardArrow = false;
     }
 
     /**
@@ -96,21 +99,6 @@ public class Weapon extends Creature {
     }
 
     /**
-     * jump
-     * 
-     * Makes the player jump if the player is on the ground or
-     * if forceJump is true.
-     * 
-     * @param forceJump is an object of class <code>Boolean</code>
-     */
-//    public void jump(boolean forceJump) {
-//        if (bOnGround || forceJump) {
-//            bOnGround = false;
-//            setVelocityY(fJUMP_SPEED);
-//        }
-//    }
-
-    /**
      * getThrowSpeed
      * 
      * returns throw speed of the weapon
@@ -128,5 +116,27 @@ public class Weapon extends Creature {
      */
     public boolean isFlying() {
         return !isAlive();
+    }
+    
+    /**
+     * isDownwardArrow
+     * 
+     * Indicates whether or not the arrow is facing downwards
+     * 
+     * @return <code>true</code> if the arrow is facing downwards
+     */
+    public boolean isDownwardArrow() {
+        return bDownwardArrow;
+    }
+    
+    /**
+     * setDownwardArrow
+     * 
+     * Sets the boolean bDownwardArrow
+     * 
+     * @param bDownwardArrow is an object of class <code>boolean</code>
+     */
+    public void setDownwardArrow( boolean bDownwardArrow ) {
+        this.bDownwardArrow = bDownwardArrow;
     }
 }

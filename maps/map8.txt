@@ -7,18 +7,18 @@
 #   !       Music Note
 #   *       Goal
 #   1       Bad Guy 1 (grub)
-#   1       Bad Guy 1 (fly)
+#   1       Bad Guy 2 (fly)
 
                              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                                                             MMMMMMMMMMM
-                                                             MMMMMMMMMMM
-                                                             MMMMMMMMMMM
+                                                    2        MMMMMMMMMMM
+                                                         2   MMMMMMMMMMM
+                                                        2       MMMMMMMM
                                                                 MMMMMMMM
                                                                 MMMMMMMM
-                                     1                 1      * MMMMMMMM
+                                     1                 1       *MMMMMMMM
                      LLLL    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                               MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
               LLLLL            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -28,7 +28,7 @@
                                 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
              LLLLLL             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+   2                            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
         LLLL                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -39,14 +39,14 @@
   LLLL                          MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
           LLLLLL                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                          2     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                      LLLL       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                               MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-              LLLL            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-       LLLLLL              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+              LLLL           KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                            KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                           KKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+       LLLLLL           KKKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                       KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
           LLLLL                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM

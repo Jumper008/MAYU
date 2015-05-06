@@ -807,10 +807,21 @@ public class GameManager extends GameCore {
                 Sprite sprSpawn = (Sprite) iteSpritesToAdd.next();
 
                 if ( sprSpawn instanceof Weapon ) {
-                    rmResourceManager.spawnArrow(
+                    
+                    Weapon weaAux = (Weapon) sprSpawn;
+                    
+                    if ( weaAux.isDownwardArrow() ) {
+                        rmResourceManager.spawnArrow2(
                             sprSpawn.getX(), sprSpawn.getY(),
                             sprSpawn.getVelocityX(), sprSpawn.getVelocityY(),
                             tmMap);
+                    } 
+                    else {
+                        rmResourceManager.spawnArrow(
+                            sprSpawn.getX(), sprSpawn.getY(),
+                            sprSpawn.getVelocityX(), sprSpawn.getVelocityY(),
+                            tmMap);
+                    }
                 }
                 
                 if (sprSpawn instanceof Fly ) {
@@ -927,7 +938,7 @@ public class GameManager extends GameCore {
             // Spawning of Bats
             if (creCreature instanceof Boss && creCreature.getVelocityX() != 0
                     && creCreature.isAlive()) {
-                int iTimeBetweenAttacks = 2000;
+                int iTimeBetweenAttacks = 3000;
                 
                 if ( creCreature.getShootTime().getTimeInMillis()
                         + iTimeBetweenAttacks
@@ -989,18 +1000,15 @@ public class GameManager extends GameCore {
                         // Arrow rain
                         case 1: {
                             smSoundManager.play(souPlayerShoot);
-                            for (int i = 0; i < 20; i ++) {
+                            for (int i = 0; i < 50; i ++) {
                                 
-                                // 
                                 int iAzarY = (int) (Math.random() * creCreature.getHeight()) 
                                         - 50;
-                                // 
-                                int iAzarX = (int) (Math.random() * 
-                                        TileMapRenderer.tilesToPixels(tmMap.getWidth())) 
-                                        + TileMapRenderer.tilesToPixels(0);
+
+                                int iAzarX = 50 * i;
 
                                 float fSpawnXPos = iAzarX;
-                                float fSpawnXVel = 0f;
+                                float fSpawnXVel = 0.01f;
                                 float fSpawnYPos = 0;
                                 float fSpawnYVel = -.2f;
 
@@ -1011,6 +1019,8 @@ public class GameManager extends GameCore {
                                             rmResourceManager.aniDefaultAnim,
                                             rmResourceManager.aniDefaultAnim,
                                             rmResourceManager.aniDefaultAnim);
+                                
+                                weaArrowToShoot.setDownwardArrow(true);
 
                                 weaArrowToShoot.setY(fSpawnYPos);
                                 weaArrowToShoot.setVelocityY(fSpawnYVel);
@@ -1082,18 +1092,20 @@ public class GameManager extends GameCore {
         //Check for collisions
             //Arrow collides with wall
         if (creCreature instanceof Weapon) {
+            Weapon weaAux = (Weapon) creCreature;
             
             // Check if arrow collided with an enemy
             Sprite sprCollision = getSpriteCollision( creCreature );
-            if ( sprCollision != null ) {
-                if (sprCollision instanceof Creature) {
+            if ( sprCollision != null && !(weaAux.isDownwardArrow()) ) {
+                
+                if (sprCollision instanceof Creature ) {
                     smSoundManager.play(souArrowHit);
-                    
-                    creCreature.setSticky(sprCollision);
-                    
+
+                    weaAux.setSticky(sprCollision);
+
                     Creature creAux = (Creature)sprCollision;
                     creAux.setHealth(creAux.getHealth() - 1);
-                    
+
                     creCreature.setVelocityX(0f);
                 }
                 else {

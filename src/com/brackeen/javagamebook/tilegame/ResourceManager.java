@@ -36,8 +36,8 @@ public class ResourceManager {
     private Sprite sprGoalSprite;
     private Sprite sprGrubSprite;
     private Sprite sprFlySprite;
-    private Sprite sprArrowSprite;
-    private Sprite sprPauseMenu;
+    private Sprite sprArrowSprite;  // Sideways arrow
+    private Sprite sprArrowSprite2; // Arrow aiming downwards
     private Sprite sprArcherSprite;
     private Sprite sprAguaSprite;
     private Sprite sprPicosSprite;
@@ -142,6 +142,45 @@ public class ResourceManager {
     }
 
     /**
+     * initSprites
+     * 
+     * Sets the initial health of sprites in the tmMap
+     * 
+     * @param tmMap an object of class <code>TileMap</code>
+     */
+    public void initSprites(TileMap tmMap) {
+        // Sprites
+        Iterator ite = tmMap.getSprites();
+        
+        while ( ite.hasNext() ) {
+            Sprite sprAux = (Sprite) ite.next();
+            
+            if ( sprAux instanceof Creature ) { // Handle creatures init
+            
+                Creature creAux = (Creature) sprAux;
+
+                if ( creAux instanceof Boss ) {
+                    creAux.setHealth(30);
+                    
+                if ( creAux instanceof Fly ) {
+                    creAux.setHealth(1);
+                }
+                
+                } else if ( creAux instanceof Grub ) {
+                    creAux.setHealth(3);
+                }
+            }
+            else {  // Handle other sprites init
+                
+            }
+        }
+        
+        // Player
+        Player plaPlayer = (Player) tmMap.getPlayer();
+        plaPlayer.setHealth(1000);
+    }
+    
+    /**
      * loadNextMap
      * 
      * returns next map
@@ -162,28 +201,6 @@ public class ResourceManager {
                 }
                 iCurrentMap = 0;
                 tmMap = null;
-            }
-        }
-        
-        // Sprites init
-        Iterator ite = tmMap.getSprites();
-        
-        while ( ite.hasNext() ) {
-            Sprite sprAux = (Sprite) ite.next();
-            
-            if ( sprAux instanceof Creature ) { // Handle creatures init
-            
-                Creature creAux = (Creature) sprAux;
-
-                if ( creAux instanceof Boss ) {
-                    creAux.setHealth(30);
-                    
-                } else if ( creAux instanceof Grub ) {
-                    creAux.setHealth(3);
-                }
-            }
-            else {  // Handle other sprites init
-                
             }
         }
         
@@ -327,6 +344,8 @@ public class ResourceManager {
             }
         }
         tmNewMap.setPlayer(player);
+        
+        initSprites( tmNewMap );
 
         return tmNewMap;
     }
@@ -438,7 +457,8 @@ public class ResourceManager {
             loadImage("rey_caminando_3.png"),
             loadImage("rey_caminando_4.png"),
             loadImage("rey_caminando_5.png"),
-            loadImage("rey_caminando_6.png")
+            loadImage("rey_caminando_6.png"),
+            loadImage("flecha2.png")
         };
 
         imaMatImages[1] = new Image[imaMatImages[0].length];
@@ -459,6 +479,7 @@ public class ResourceManager {
         Animation[] aniArrFlyAnim = new Animation[4];
         Animation[] aniArrGrubAnim = new Animation[4];
         Animation[] aniArrArrowAnim = new Animation[4];
+        Animation[] aniArrArrowAnim2 = new Animation[4];
         Animation[] aniArrArcherAnim = new Animation[4];
         Animation[] aniArrBossAnim = new Animation[4];
         
@@ -485,6 +506,8 @@ public class ResourceManager {
                     imaMatImages[iI][29],imaMatImages[iI][30],
                     imaMatImages[iI][31],imaMatImages[iI][32],
                     imaMatImages[iI][33]);
+            aniArrArrowAnim2[iI] = createWeaponAnim(imaMatImages[iI][34], 
+                    imaMatImages[iI][34], imaMatImages[iI][34]);
         }
 
         // create creature sprites
@@ -503,6 +526,9 @@ public class ResourceManager {
         sprArrowSprite = new Weapon(aniArrArrowAnim[0], aniArrArrowAnim[1], 
                 aniArrArrowAnim[2], aniArrArrowAnim[0], aniArrArrowAnim[0], 
                 aniArrArrowAnim[1]);
+        sprArrowSprite2 = new Weapon(aniArrArrowAnim2[0], aniArrArrowAnim2[1], 
+                aniArrArrowAnim2[2], aniArrArrowAnim2[0], aniArrArrowAnim2[0], 
+                aniArrArrowAnim2[1]);
         sprBossSprite = new Boss(aniArrBossAnim[0], aniArrBossAnim[1],
                 aniArrBossAnim[2], aniArrBossAnim[3], aniArrBossAnim[0], 
                 aniArrBossAnim[1]);
@@ -617,10 +643,10 @@ public class ResourceManager {
     private void loadPowerUpSprites() {
         // create "goal" sprite
         Animation aniAnim = new Animation();
-        aniAnim.addFrame(loadImage("heart1.png"), 150);
-        aniAnim.addFrame(loadImage("heart2.png"), 150);
-        aniAnim.addFrame(loadImage("heart3.png"), 150);
-        aniAnim.addFrame(loadImage("heart2.png"), 150);
+        aniAnim.addFrame(loadImage("puerta_1.png"), 150);
+        aniAnim.addFrame(loadImage("puerta_1.png"), 150);
+        aniAnim.addFrame(loadImage("puerta_1.png"), 150);
+        aniAnim.addFrame(loadImage("puerta_1.png"), 150);
         sprGoalSprite = new PowerUp.Goal(aniAnim);
         
         aniAnim = new Animation();
@@ -657,7 +683,8 @@ public class ResourceManager {
     /**
      * spawnArrow
      * 
-     * Spawns an arrow in a Map with a specific position and velocity.
+     * Spawns an arrow in a Map with a specific position and velocity. The arrow
+     * faces sideways.
      * 
      * @param fPosX is an object of class <code>float</code> that represents the position of the arrow in the X axis
      * @param fPosY is an object of class <code>float</code> that represents the position of the arrow in the Y axis
@@ -673,6 +700,32 @@ public class ResourceManager {
         weaSpawnSprite.setY(fPosY);
         weaSpawnSprite.setVelocityX(fVelX);
         weaSpawnSprite.setVelocityY(fVelY);
+        
+        tmMap.addSprite(weaSpawnSprite);
+    }
+    
+    /**
+     * spawnArrow2
+     * 
+     * Spawns an arrow in a Map with a specific position and velocity. The arrow
+     * faces downwards.
+     * 
+     * @param fPosX is an object of class <code>float</code> that represents the position of the arrow in the X axis
+     * @param fPosY is an object of class <code>float</code> that represents the position of the arrow in the Y axis
+     * @param fVelX is an object of class <code>float</code> that represents the velocity of the arrow in the X axis
+     * @param fVelY is an object of class <code>float</code> that represents the velocity of the arrow in the Y axis
+     * @param tmMap is an object of class <code>TileMap</code> that represents the map on which the object is spawned
+     */
+    public void spawnArrow2(float fPosX, float fPosY, float fVelX, float fVelY, TileMap tmMap) {
+        Weapon weaSpawnSprite;
+        weaSpawnSprite = (Weapon)sprArrowSprite2.clone();
+        
+        weaSpawnSprite.setX(fPosX);
+        weaSpawnSprite.setY(fPosY);
+        weaSpawnSprite.setVelocityX(fVelX);
+        weaSpawnSprite.setVelocityY(fVelY);
+        
+        weaSpawnSprite.setDownwardArrow(true);
         
         tmMap.addSprite(weaSpawnSprite);
     }
@@ -696,6 +749,8 @@ public class ResourceManager {
         flSpawnSprite.setY(fPosY);
         flSpawnSprite.setVelocityX(fVelX);
         flSpawnSprite.setVelocityY(fVelY);
+        
+        flSpawnSprite.setHealth(1);
         
         tmMap.addSprite(flSpawnSprite);
     }
