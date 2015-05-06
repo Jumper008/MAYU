@@ -3,9 +3,6 @@ package com.brackeen.javagamebook.tilegame.sprites;
 import com.brackeen.javagamebook.graphics.Animation;
 
 /**
-    A Boss is a Creature that moves slowly on the ground.
-*/
-/**
  * Boss
  *
  * It manages the definition of each object of type <code>Boss</code>
@@ -64,7 +61,7 @@ public class Boss extends Creature {
      * @return object of class <code>integer</code>
      */
     public float getMaxSpeed() {
-        return 0.5f;
+        return 0.4f;
     }
 
 }

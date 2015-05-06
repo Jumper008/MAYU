@@ -415,7 +415,7 @@ public class ResourceManager {
             loadImage("rey_caminando_3.png"),
             loadImage("rey_caminando_4.png"),
             loadImage("rey_caminando_5.png"),
-            loadImage("rey_caminando_6.png"),
+            loadImage("rey_caminando_6.png")
         };
 
         imaMatImages[1] = new Image[imaMatImages[0].length];
@@ -458,10 +458,10 @@ public class ResourceManager {
                     imaMatImages[iI][24]);
             aniArrArrowAnim[iI] = createWeaponAnim(imaMatImages[iI][25], 
                     imaMatImages[iI][25], imaMatImages[iI][25]);
-            aniArrBossAnim[iI] = createGrubAnim(imaMatImages[iI][29], 
-                    imaMatImages[iI][30],imaMatImages[iI][31],
-                    imaMatImages[iI][32],imaMatImages[iI][33],
-                    imaMatImages[iI][34]);
+            aniArrBossAnim[iI] = createGrubAnim(imaMatImages[iI][28], 
+                    imaMatImages[iI][29],imaMatImages[iI][30],
+                    imaMatImages[iI][31],imaMatImages[iI][32],
+                    imaMatImages[iI][33]);
         }
 
         // create creature sprites
