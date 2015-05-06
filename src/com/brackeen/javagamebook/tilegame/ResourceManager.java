@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 
 import com.brackeen.javagamebook.graphics.*;
 import com.brackeen.javagamebook.tilegame.sprites.*;
+import java.util.Iterator;
 
 
 /**
@@ -163,7 +164,29 @@ public class ResourceManager {
                 tmMap = null;
             }
         }
+        
+        // Sprites init
+        Iterator ite = tmMap.getSprites();
+        
+        while ( ite.hasNext() ) {
+            Sprite sprAux = (Sprite) ite.next();
+            
+            if ( sprAux instanceof Creature ) { // Handle creatures init
+            
+                Creature creAux = (Creature) sprAux;
 
+                if ( creAux instanceof Boss ) {
+                    creAux.setHealth(30);
+                    
+                } else if ( creAux instanceof Grub ) {
+                    creAux.setHealth(3);
+                }
+            }
+            else {  // Handle other sprites init
+                
+            }
+        }
+        
         return tmMap;
     }
 

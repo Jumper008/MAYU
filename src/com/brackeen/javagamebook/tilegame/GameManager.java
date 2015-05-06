@@ -80,6 +80,7 @@ public class GameManager extends GameCore {
     private float fInitialJumpY;    // States from where the character started to jump
     
     private int iLife;
+    private int iInitialLife = 3;
     private int iScore;
     private boolean bPause;
     private boolean bArrowAvailable;
@@ -123,7 +124,7 @@ public class GameManager extends GameCore {
         // load resources
         tmrRenderer = new TileMapRenderer();
         //vidas int
-        iLife = 2;
+        iLife = iInitialLife;
         //Score
         iScore = 0;
         
@@ -295,7 +296,7 @@ public class GameManager extends GameCore {
              mpMidiPlayer.play(seqSequence3, true);
             if (gaEnter.isPressed()) {
                         smSoundManager.play(souMenuSelect);
-                        iLife = 2;
+                        iLife = iInitialLife;
                         mpMidiPlayer.play(seqSequence, true);
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
@@ -306,7 +307,7 @@ public class GameManager extends GameCore {
         if(gaWakeUp.isPressed() && bPause) {
             smSoundManager.play(souMenuSelect);
             mpMidiPlayer.play(seqSequence, true);
-            iLife = 2;
+            iLife = iInitialLife;
             bPause = false;
             rmResourceManager.iCurrentMap = 2;
             tmrRenderer.setBackground(lklBackgrounds.get
@@ -542,15 +543,43 @@ public class GameManager extends GameCore {
         
          //Update life and score
         if(rmResourceManager.iCurrentMap > 5){
-         gra2D_G.draw3DRect(0, 0, 170, 80, true);
-         gra2D_G.setColor(Color.decode("#A3A375"));
-         gra2D_G.fill3DRect(0, 0, 170, 80, true);
-         gra2D_G.setColor(Color.black);
-         gra2D_G.drawString("Score: " + iScore, 10, 20);
-         gra2D_G.drawString("Life: " + iLife, 10, 45);
-         Player plaPlayer = (Player) tmMap.getPlayer();
-         gra2D_G.drawString("Health: " + plaPlayer.getHealth(), 10, 75);
+            gra2D_G.draw3DRect(0, 0, 170, 80, true);
+            gra2D_G.setColor(Color.decode("#A3A375"));
+            gra2D_G.fill3DRect(0, 0, 170, 80, true);
+            gra2D_G.setColor(Color.black);
+            gra2D_G.drawString("Score: " + iScore, 10, 20);
+            gra2D_G.drawString("Life: " + iLife, 10, 45);
+            Player plaPlayer = (Player) tmMap.getPlayer();
+            gra2D_G.drawString("Health: " + plaPlayer.getHealth(), 10, 75);
+            
+            // Show how to pause:
+            if ( !bPause ) {
+                gra2D_G.drawString("Pause (P)", smScreen.getWidth() - 125, 
+                        smScreen.getHeight() - 15);
+            }
+
+            Iterator ite = tmMap.getSprites();
+            
+            while ( ite.hasNext() ) {
+                Sprite sprAux = (Sprite) ite.next();
+                
+                if ( sprAux instanceof Boss ) {
+                    Boss bosAux = (Boss) sprAux;
                     
+                    int iRectWidth = 170;
+                    int iRectHeight = 50;
+                    
+                    gra2D_G.draw3DRect(smScreen.getWidth() - iRectWidth, 
+                            0, iRectWidth, iRectHeight, true);
+                    gra2D_G.setColor(Color.decode("#A3A375"));
+                    gra2D_G.fill3DRect(smScreen.getWidth() - iRectWidth,
+                            0, iRectWidth, iRectHeight, true);
+                    gra2D_G.setColor(Color.black);
+                    
+                    gra2D_G.drawString("BOSS HP: " + bosAux.getHealth(), 
+                            smScreen.getWidth() - iRectWidth + 10, 30);
+                }
+            }
         }
     }
     
@@ -910,7 +939,9 @@ public class GameManager extends GameCore {
                     int iAttackType = (int) (Math.random() * 2) + 0;
                     
                     switch (iAttackType) {
-                        case 0: {
+                        
+                        // Batswarm
+                        case 0: {  
                             smSoundManager.play(souPlayerShoot);
                             for (int i = 0; i < 5; i ++) {
                                 
@@ -954,6 +985,8 @@ public class GameManager extends GameCore {
                             }
                             break;
                         }
+                        
+                        // Arrow rain
                         case 1: {
                             smSoundManager.play(souPlayerShoot);
                             for (int i = 0; i < 20; i ++) {
@@ -1091,7 +1124,8 @@ public class GameManager extends GameCore {
             checkPlayerCollision((Player)creCreature, bCanKill);
         }
         
-        // Check if creature fell to its demise
+        // Falls and invisible walls
+            // Check if creature fell to its demise
         if (creCreature.getY() > TileMapRenderer.tilesToPixels( tmMap.getHeight()) 
                 && creCreature.getState() == Creature.iSTATE_NORMAL) {
             
@@ -1100,6 +1134,25 @@ public class GameManager extends GameCore {
             
             if ( creCreature instanceof Player ) {
                 iLife -= 1;
+            }
+        }
+        
+            // Map 9
+        if ( rmResourceManager.iCurrentMap == 9 ) {
+            // Invisible wall for boss
+            if ( creCreature instanceof Boss ) {
+                if ( creCreature.getX() < 80 || creCreature.getX() > 2000 ) {
+                    creCreature.setVelocityX( creCreature.getVelocityX() * -1 );
+                }
+            }
+            
+            // Destroy spawned bats on contact with screen borders
+            if ( creCreature instanceof Fly ) {
+                if ( creCreature.getX() < 10 
+                        || creCreature.getX() 
+                        >  TileMapRenderer.tilesToPixels( tmMap.getWidth() ) ) {
+                    creCreature.setState( Creature.iSTATE_DEAD );
+                }
             }
         }
     }
