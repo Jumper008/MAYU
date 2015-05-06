@@ -1095,11 +1095,11 @@ public class GameManager extends GameCore {
                 }
                 case 7:{
                    tmrRenderer.setBackground(lklBackgrounds.get(7));
-                   mpMidiPlayer.play(seqSequence4, true);
+                   mpMidiPlayer.play(seqSequence3, true);
                     break;
                 }
                 case 8:{
-                    mpMidiPlayer.play(seqSequence3, true);
+                    mpMidiPlayer.play(seqSequence4, true);
                     break;
                 }
                 case 9:{
