@@ -138,7 +138,7 @@ public class GameManager extends GameCore {
             // First map
         lklBackgrounds.add(rmResourceManager.loadImage("Fondo_Villa_2_Negro.jpg"));
             // Second map
-        lklBackgrounds.add(rmResourceManager.loadImage("background.png"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Fondo_Castillo.jpg"));
             // Third map
         lklBackgrounds.add(rmResourceManager.loadImage("background.png"));
             // Fourth map
@@ -1089,7 +1089,7 @@ public class GameManager extends GameCore {
                     break;
                 }
                 case 7:{
-                   
+                   tmrRenderer.setBackground(lklBackgrounds.get(7));
                     break;
                 }
                 case 8:{

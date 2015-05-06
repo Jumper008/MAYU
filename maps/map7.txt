@@ -2,17 +2,13 @@
 # (L9nes th3t st3rt w9th '#' 3re comments)
 # The t9les 3re:
 #   (S93ce) Em9ty t9le
-#   3..Z    T9les 3 through Z
-#   o       St3r
-#   !       Mus9c Note
-#   *       Go3l
-#   1       B3d Guy 1 (grub)
-#   1       B3d Guy 1 (fly)
 
-
-
- 
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                                                                        MMMM              M 
+                                                                                        MMMM              M
                                                                                          MMM              M
                                                                                           MM              M              
  *                                                                                         M                
@@ -24,23 +20,23 @@ LLLL                                                                            
                                               MMMMMMM               MMMMM                    2    MMMM    M
 9999999999999999999999999999999999999999999999MMMMMMM999999999999999MMMMM                        MMMMM  o M
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMML    MMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                                         MM                                              MMM              M
-                                         MM                                               MM              M
-                                         MM                                                M              
-                                         MM                              LLLL              M 1           3M
-                                         MM                                                MLLL      LLLLLM
-                                         MM                                                M       1M     M
-                                         MM                             MMMM                       MM     M
-                                         MM                             MMMMM                     MMM     M
-                                         MM       MMM99999MMM9999MM99999MMMMMMM                         o M
-                                         MMLL    LMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                                         MM                                                           MMMMM
-                                         MM                                                             MMM
-                                         MM LLLLLL                                   2                    M
-                                         MM                                                               M
-                                         MM 3          1     1          1                       3         M
-                                         MMLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL       D
-                                         MM                                                               D
-                                         MM                                                     *         D 
-                                         MM        3      1     1        31          1  1                 D
-                                         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                              MMM              M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                               MM              M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                M              
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                              LLLL              M 1           3M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                MLLL      LLLLLM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                M       1M     M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                             MMMM                       MM     M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                             MMMMM                     MMM     M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM       MMM99999MMM9999MM99999MMMMMMM                  MMMM   o M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMLL    LMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                           MMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                             MMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM LLLLLL                                   2                    M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                               M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM 3          1     1          1                       3         M
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL       D
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                               D
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                     *         D 
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM        3      1     1        31          1  1                 D
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
