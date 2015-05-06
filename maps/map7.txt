@@ -1,10 +1,10 @@
-# M3p file for tile-b3sed g3me
-# (Lines th3t st3rt with '#' 3re comments)
-# The tiles 3re:
-#   (Sp3ce) Empty tile
-#   3..Z    Tiles 3 through Z
+# M39 f9le for t9le-b3sed g3me
+# (L9nes th3t st3rt w9th '#' 3re comments)
+# The t9les 3re:
+#   (S93ce) Em9ty t9le
+#   3..Z    T9les 3 through Z
 #   o       St3r
-#   !       Music Note
+#   !       Mus9c Note
 #   *       Go3l
 #   1       B3d Guy 1 (grub)
 #   1       B3d Guy 1 (fly)
@@ -22,7 +22,7 @@ LLLL                                                                            
                                                                                               2    MMM    M
                                                 1                                                  MMM    M
                                               MMMMMMM               MMMMM                    2    MMMM    M
-IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIMMMMMMMIIIIIIIIIIIIIIIMMMMM                        MMMMM  o M
+9999999999999999999999999999999999999999999999MMMMMMM999999999999999MMMMM                        MMMMM  o M
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMML    MMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                          MM                                              MMM              M
                                          MM                                               MM              M
@@ -32,7 +32,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMML    MM
                                          MM                                                M       1M     M
                                          MM                             MMMM                       MM     M
                                          MM                             MMMMM                     MMM     M
-                                         MM       MMMIIIIIMMMIIIIMMIIIIIMMMMMMM                         o M
+                                         MM       MMM99999MMM9999MM99999MMMMMMM                         o M
                                          MMLL    LMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                          MM                                                           MMMMM
                                          MM                                                             MMM

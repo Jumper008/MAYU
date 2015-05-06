@@ -39,6 +39,7 @@ public class ResourceManager {
     private Sprite sprPauseMenu;
     private Sprite sprArcherSprite;
     private Sprite sprAguaSprite;
+    private Sprite sprPicosSprite;
     
     public Animation aniDefaultAnim; //Animation meant to be used by other classes when there is no animation available
 
@@ -257,6 +258,9 @@ public class ResourceManager {
                 }
                 else if (cChar == '8') {
                     addSprite( tmNewMap, sprAguaSprite, iX, iY);
+                }
+                else if (cChar == '9') {
+                    addSprite( tmNewMap, sprPicosSprite, iX, iY);
                 }
             }
         }
@@ -596,6 +600,13 @@ public class ResourceManager {
         aniAnim.addFrame(loadImage("star3.png"), 100);
         aniAnim.addFrame(loadImage("star4.png"), 100);
         sprCoinSprite = new PowerUp.Star(aniAnim);
+        
+        aniAnim = new Animation();
+        aniAnim.addFrame(loadImage("Picos.png"), 100);
+        aniAnim.addFrame(loadImage("Picos.png"), 100);
+        aniAnim.addFrame(loadImage("Picos.png"), 100);
+        aniAnim.addFrame(loadImage("Picos.png"), 100);
+        sprPicosSprite = new PowerUp.Star(aniAnim);
 
         // create "music" sprite
         aniAnim = new Animation();

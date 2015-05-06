@@ -1055,14 +1055,18 @@ public class GameManager extends GameCore {
     public void acquirePowerUp(PowerUp puPowerUp) {
         // remove it from the map (not implemented, yet)
         //tmMap.removeSprite(puPowerUp);
+        Player plaPlayer = (Player)tmMap.getPlayer();
 
         if (puPowerUp instanceof PowerUp.Star) {
             // do something here, like give the player points
-            smSoundManager.play(souPrizeSound);
+            //smSoundManager.play(souPrizeSound);
+            plaPlayer.setState(Creature.iSTATE_DYING);
+            iLife -= 1;
         }
         else if (puPowerUp instanceof PowerUp.Music) {
             // Change the music
             smSoundManager.play(souPrizeSound);
+            
             toggleDrumPlayback();
         }
         else if (puPowerUp instanceof PowerUp.Goal) {
