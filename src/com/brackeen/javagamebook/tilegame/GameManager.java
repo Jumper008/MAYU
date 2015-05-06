@@ -752,7 +752,9 @@ public class GameManager extends GameCore {
 
                     //Show dying animation if creature has run out of health
                     if (creature.getHealth() == 0) {
-                        smSoundManager.play(souEnemyDeath);
+                        if ( !(creature instanceof Weapon) ) {
+                           smSoundManager.play(souEnemyDeath);  // Don't play dying sound for weapons that fall
+                        }
                         creature.setState(Creature.iSTATE_DYING);
                         creature.setHealth(-1);
                     }
