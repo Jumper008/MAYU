@@ -181,7 +181,7 @@ public class GameManager extends GameCore {
             mpMidiPlayer.getSequence("sounds/Castle.mid");
         
         seqSequence3 =
-            mpMidiPlayer.getSequence("sounds/GameOver.mid");
+            mpMidiPlayer.getSequence("sounds/BOSS.mid");
         //Pause
         bPause = false;
         
@@ -1069,7 +1069,7 @@ public class GameManager extends GameCore {
             // Advance to next map and change background according to map
             smSoundManager.play(souPrizeSound,
                 new EchoFilter(2000, .7f), false);
-                mpMidiPlayer.play(seqSequence2, true);
+                
             switch(rmResourceManager.getICurrentMap()) {
                 case 4: { // Map 5
                     tmrRenderer.setBackground(lklBackgrounds.get(4));
@@ -1081,7 +1081,19 @@ public class GameManager extends GameCore {
                 }
                 case 6: { // Map 7
                     tmrRenderer.setBackground(lklBackgrounds.get(6));
+                     mpMidiPlayer.play(seqSequence2, true);
                     break;
+                }
+                case 7:{
+                   
+                    break;
+                }
+                case 8:{
+                    mpMidiPlayer.play(seqSequence3, true);
+                    break;
+                }
+                case 9:{
+                    
                 }
                 default: {
                     break;
