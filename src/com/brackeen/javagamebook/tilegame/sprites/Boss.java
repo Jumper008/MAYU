@@ -61,7 +61,6 @@ public class Boss extends Creature {
      * @return object of class <code>integer</code>
      */
     public float getMaxSpeed() {
-        return 0.4f;
+        return 0.35f;
     }
-
 }

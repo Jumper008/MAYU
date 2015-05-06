@@ -374,6 +374,7 @@ public class GameManager extends GameCore {
                         tmMap = rmResourceManager.loadNextMap();
                     }
                     if (gaReturn.isPressed()) {
+                        smSoundManager.play(souMenuSelect);
                         rmResourceManager.iCurrentMap = 2;
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
@@ -384,6 +385,7 @@ public class GameManager extends GameCore {
                 // Controls
                 case 4: {
                     if (gaReturn.isPressed()) {
+                        smSoundManager.play(souMenuSelect);
                         rmResourceManager.iCurrentMap = 3;
                         tmrRenderer.setBackground(lklBackgrounds.get
                                 (rmResourceManager.getICurrentMap()));
@@ -579,8 +581,14 @@ public class GameManager extends GameCore {
                             0, iRectWidth, iRectHeight, true);
                     gra2D_G.setColor(Color.black);
                     
-                    gra2D_G.drawString("BOSS HP: " + bosAux.getHealth(), 
-                            smScreen.getWidth() - iRectWidth + 10, 30);
+                    if (bosAux.getHealth() > 0) {
+                        gra2D_G.drawString("BOSS HP: " + bosAux.getHealth(), 
+                                smScreen.getWidth() - iRectWidth + 10, 30);
+                    }
+                    else {
+                        gra2D_G.drawString("BOSS HP: 0", 
+                                smScreen.getWidth() - iRectWidth + 10, 30);
+                    }
                 }
             }
         }
@@ -946,11 +954,33 @@ public class GameManager extends GameCore {
             int iX = Math.round(creCreature.getX()) + iOffsetX;
             int iY = Math.round(creCreature.getY()) + iOffsetY;
             
-            // Spawning of Bats
+            // Boss attacks
             if (creCreature instanceof Boss && creCreature.getVelocityX() != 0
                     && creCreature.isAlive()) {
-                int iTimeBetweenAttacks = 3000;
                 
+                int iTimeBetweenAttacks; // Time the boss waits before launching an attack
+                int iBossHP = creCreature.getHealth();
+                
+                if ( iBossHP > 30 * 0.6 ) {
+                    iTimeBetweenAttacks = 5000;
+                    
+                } else if ( iBossHP > 30 * 0.3 ) {
+                    iTimeBetweenAttacks = 3500;
+                    
+                    if ( creCreature.getVelocityX() > 0 ) {
+                        creCreature.setVelocityX(0.5f);
+                    } else {
+                        creCreature.setVelocityX(-0.5f);                    
+                    }
+                } else {
+                    iTimeBetweenAttacks = 2500;
+                    
+                    if ( creCreature.getVelocityX() > 0 ) {
+                        creCreature.setVelocityX(0.65f);
+                    } else {
+                        creCreature.setVelocityX(-0.65f);                    
+                    }
+                }
                 if ( creCreature.getShootTime().getTimeInMillis()
                         + iTimeBetweenAttacks
                         < Calendar.getInstance().getTimeInMillis()
@@ -1011,7 +1041,7 @@ public class GameManager extends GameCore {
                         // Arrow rain
                         case 1: {
                             smSoundManager.play(souPlayerShoot);
-                            for (int i = 0; i < 50; i ++) {
+                            for (int i = 0; i < 43; i ++) {
                                 
                                 int iAzarY = (int) (Math.random() * creCreature.getHeight()) 
                                         - 50;

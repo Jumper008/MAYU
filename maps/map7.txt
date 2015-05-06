@@ -2,7 +2,7 @@
 # (L9nes th3t st3rt w9th '#' 3re comments)
 # The t9les 3re:
 #   (S93ce) Em9ty t9le
-
+#
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -11,17 +11,17 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                                                                         MMMM              MM
                                                       LL                                 MMM              MM
                                                                                           MM              MM
-*                                                                                          M               
+*                                   2                                                      M               
 LLLL                                                                                       M 1           3MM
          LLLLLL                    LLLLLL                                                  MLLL      LLLLLMM
              LLLL        LLLLLL                                LL                          M        1M    MM
-                                                                                              2    MMM    MM
-                                                1                                                  MMM    MM
-                                              MMMMMMM               MMMMM                    2    MMMM    MM
+                                                                                                   MMM    MM
+                                                    1                                         2    MMM    MM
+                                              MMMMMMM               MMMMM                 2       MMMM    MM
 9999999999999999999999999999999999999999999999MMMMMMM999999999999999MMMMM                        MMMMM    MM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMML    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMLL   MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                              MMM              MM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                               MM              MM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                        2      MM              MM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                M              
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                              LLLL              M 1           3MM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                                                MLLL      LLLLLMM
