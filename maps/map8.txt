@@ -9,9 +9,10 @@
 #   1       Bad Guy 1 (grub)
 #   1       Bad Guy 1 (fly)
 
-
-
-                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                                                   
                                                                   
                                                                   
@@ -19,41 +20,41 @@
                                                                   
                                      1                 1         *
                      LLLL    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                              MMM
-              LLLLL            MM
-                                M
-                                M
-                      LLLLLL    M
-                                M
-             LLLLLL             M
-                                M
-                                M
-        LLLL                    M
-                                M
-                                M
-                 LLLLL          M
-                                M
-         LLLL                   M
-                                M
-  LLLL                          M 
-                                M 
-          LLLLLL                M 
-                                M
-                     LLLL       M
-                                M
-              LLLL              M 
-                                M
-                                M
-       LLLLLL                   M
-                                M
-                       MMMMMMMMMM
-          LLLLL                  
-                                 
-  LLLL                 
-          
-          LLLL        LLMMLLLLLLL
-                       MMM      L
-                       MM        
-                       MM        
+                              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+              LLLLL            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                      LLLLLL    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+             LLLLLL             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+        LLLL                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                 LLLLL          MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+         LLLL                   MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+  LLLL                          MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM 
+          LLLLLL                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM 
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                     LLLL       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+              LLLL            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+       LLLLLL              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+          LLLLL                       MMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                      MMMMMMMMMMMMMMMMMMMMMMMMMMMM
+  LLLL                                MMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                      MMMMMMMMMMMMMMMMMMMMMMMMMMMM
+          LLLL      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM        
+                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM        
                        MMIIIIIIII
                        MMMMMMMMMM

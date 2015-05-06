@@ -1,13 +1,13 @@
-# Map file for tile-based game
-# (Lines that start with '#' are comments)
-# The tiles are:
-#   (Space) Empty tile
-#   A..Z    Tiles A through Z
-#   o       Star
+# M3p file for tile-b3sed g3me
+# (Lines th3t st3rt with '#' 3re comments)
+# The tiles 3re:
+#   (Sp3ce) Empty tile
+#   3..Z    Tiles 3 through Z
+#   o       St3r
 #   !       Music Note
-#   *       Goal
-#   1       Bad Guy 1 (grub)
-#   1       Bad Guy 1 (fly)
+#   *       Go3l
+#   1       B3d Guy 1 (grub)
+#   1       B3d Guy 1 (fly)
 
 
 
@@ -16,7 +16,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                                                                          MMM              M
                                                                                           MM              M              
  *                                                                                         M                
-LLLL                                                                                       M 1           AM
+LLLL                                                                                       M 1           3M
          LLLLLL                    LLLLLL                                                  MLLL      LLLLLM
              LLLL        LLLLLL                                LL                          M        1M    M
                                                                                               2    MMM    M
@@ -27,20 +27,20 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMML    MM
                                          MM                                              MMM              M
                                          MM                                               MM              M
                                          MM                                                M              
-                                         MM                              LLLL              M 1           AM
+                                         MM                              LLLL              M 1           3M
                                          MM                                                MLLL      LLLLLM
                                          MM                                                M       1M     M
-                                         MM	       		       MMMM                        MMM    M
-                                         MM     		       MMMMMM                      MMM    M
-                                         MM       MMMIIIIIMMMIIIIMMIIIIIMMMMMMM                    MMM  o M
+                                         MM                             MMMM                       MM     M
+                                         MM                             MMMMM                     MMM     M
+                                         MM       MMMIIIIIMMMIIIIMMIIIIIMMMMMMM                         o M
                                          MMLL    LMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                                          MM                                                           MMMMM
                                          MM                                                             MMM
                                          MM LLLLLL                                   2                    M
                                          MM                                                               M
-                                         MM A          1     1          1                       A         M
+                                         MM 3          1     1          1                       3         M
                                          MMLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL       D
                                          MM                                                               D
-                                         MM                                                               D 
-                                         MM        A      1     1        A1          1  1                 D
+                                         MM                                                     *         D 
+                                         MM        3      1     1        31          1  1                 D
                                          MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
