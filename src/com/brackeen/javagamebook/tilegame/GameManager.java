@@ -53,6 +53,7 @@ public class GameManager extends GameCore {
 
     // Game objects
     private Point pPointCache = new Point();
+    private boolean bGameOverScreen = false;
     private TileMap tmMap;
     private MidiPlayer mpMidiPlayer;
     private SoundManager smSoundManager;
@@ -148,7 +149,7 @@ public class GameManager extends GameCore {
         lklBackgrounds.add(rmResourceManager.loadImage("first.jpg"));
             //GameOver map
         lklBackgrounds.add(rmResourceManager.loadImage("Game Over1.jpg"));
-        lklBackgrounds.add(rmResourceManager.loadImage("Background.png"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Thanks_for_playing.png"));
         
         tmrRenderer.setBackground(lklBackgrounds.get(0));
         
@@ -491,8 +492,8 @@ public class GameManager extends GameCore {
             else {
             // Checks if enter has been pressed within gameover menu
             ///if( rmResourceManager.iCurrentMap == 9 ) {
-            if ( gaEnter.isPressed() ) {    
-                System.out.println( "HELLO" );
+            if ( gaEnter.isPressed() ) {
+                bGameOverScreen = false;
                 rmResourceManager.iCurrentMap = 1;
                 tmrRenderer.setBackground(
                         lklBackgrounds.get(rmResourceManager.getICurrentMap()));
@@ -528,23 +529,22 @@ public class GameManager extends GameCore {
         }
         //play
         if(rmResourceManager.iCurrentMap == 3){
-           gra2D_G.setColor(Color.black);
-           gra2D_G.drawString("Play - J", (smScreen.getWidth()/2) - 50, 270);
-           gra2D_G.drawString("Options - O", (smScreen.getWidth()/2) + 210,(smScreen.getHeight()/2) + 50);
+           // Draw strings for menu
            
         }
         //Desk
         if(rmResourceManager.iCurrentMap == 4){
-           gra2D_G.setColor(Color.black);
-           gra2D_G.drawString("Controls - C",600, 130);
-           gra2D_G.drawString("Return - Back space",30 ,580 );
+           // Draw strings for menu
         }
         //Computer/controles
         if(rmResourceManager.iCurrentMap == 5){
-           gra2D_G.setColor(Color.black);
-           gra2D_G.drawString("Return - Back space",10 ,30 ); 
+           
         }
         
+        if (bGameOverScreen) {
+            gra2D_G.setColor(Color.white);
+            gra2D_G.drawString("Press Enter to try again",10 ,30 ); 
+        }
         
          //Update life and score
         if(rmResourceManager.iCurrentMap > 5){
@@ -770,9 +770,12 @@ public class GameManager extends GameCore {
         
         if(iLife == 0){     // Send to game over screen
             rmResourceManager.iCurrentMap = 9;
+            bGameOverScreen = true;
             tmrRenderer.setBackground(lklBackgrounds.get
                      (rmResourceManager.getICurrentMap()));
             tmMap = rmResourceManager.loadNextMap();
+        } else {
+            bGameOverScreen = false;
         }
         
         
