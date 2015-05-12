@@ -149,7 +149,7 @@ public class GameManager extends GameCore {
         lklBackgrounds.add(rmResourceManager.loadImage("first.jpg"));
             //GameOver map
         lklBackgrounds.add(rmResourceManager.loadImage("Game Over1.jpg"));
-        lklBackgrounds.add(rmResourceManager.loadImage("Thanks_for_playing.png"));
+        lklBackgrounds.add(rmResourceManager.loadImage("Thanks_for_playing.jpg"));
         
         tmrRenderer.setBackground(lklBackgrounds.get(0));
         
