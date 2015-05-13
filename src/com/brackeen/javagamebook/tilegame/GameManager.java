@@ -800,6 +800,7 @@ public class GameManager extends GameCore {
                            smSoundManager.play(souEnemyDeath);  // Don't play dying sound for weapons that fall
                         }
                         creature.setState(Creature.iSTATE_DYING);
+                        iScore += 10;
                         creature.setHealth(-1);
                     }
 
